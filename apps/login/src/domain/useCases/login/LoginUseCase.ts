@@ -1,4 +1,4 @@
-import { UiError } from "../../models/Error";
+import { UiError } from "../../models/uiError";
 import { User } from "../../models/user";
 
 export interface LoginUseCase {

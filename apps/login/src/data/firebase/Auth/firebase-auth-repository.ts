@@ -1,19 +1,9 @@
 import { AuthRepository } from "../../../domain/repositories/auth-repository";
-import {
-  signInWithEmailAndPassword,
-  Auth,
-  User as FirebaseAuthUser,
-} from "firebase/auth";
+import { signInWithEmailAndPassword, Auth } from "firebase/auth";
 import { auth as firebaseAuthInstance } from "../clientApp";
 import { createUserWithEmailAndPassword, UserCredential } from "firebase/auth";
 import { User } from "../../../domain/models/user";
-
-function mapFirebaseUserToDomainUser(firebaseUser: FirebaseAuthUser): User {
-  return {
-    id: firebaseUser.uid,
-    email: firebaseUser.email,
-  };
-}
+import { mapFirebaseUserToDomainUser } from "../../mappers";
 
 export class FirebaseAuthRepository implements AuthRepository {
   private auth: Auth;

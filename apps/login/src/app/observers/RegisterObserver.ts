@@ -1,5 +1,5 @@
 import { debounceTime, distinctUntilChanged, fromEvent, map } from "rxjs";
-import { UiError } from "../../domain/models/Error";
+import { UiError } from "../../domain/models/uiError";
 
 export default class RegisterObserver {
   private inputError: UiError = {

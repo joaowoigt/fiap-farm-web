@@ -1,0 +1,59 @@
+import { Text } from "@repo/ui/texts";
+import { Button } from "@repo/ui/buttons";
+
+export interface LoginFormScreenProps {
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  handleEmailChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handlePasswordChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  error: { show: boolean; message: string };
+}
+
+export default function LoginFormScreen({
+  onSubmit,
+  handleEmailChange,
+  handlePasswordChange,
+  error,
+}: LoginFormScreenProps) {
+  return (
+    <div>
+      <div className="flex flex-col items-center  w-[450px] justify-center border-2 border-white p-medium rounded-lg bg-white bg-opacity-10">
+        <Text intent="Heading" color="black" style="bold" text="Login"></Text>
+        {error.show && (
+          <Text
+            intent="Regular"
+            color="negative"
+            style="bold"
+            text={error.message}
+          ></Text>
+        )}
+        <form>
+          <Text intent="Regular" color="black" style="bold" text="Email"></Text>
+          <input
+            className="outline outline-1 outline-primary  mb-big mt-medium bg-white rounded-md px-small w-[250px]  py-small text-black text-start flex flex-row hover:cursor-text"
+            type="text"
+            name="emailname"
+            onChange={handleEmailChange}
+            color="black"
+          ></input>
+          <Text intent="Regular" color="black" style="bold" text="Senha"></Text>
+          <input
+            className="outline outline-1 outline-primary  mb-big mt-medium bg-white rounded-md px-small w-[250px]  py-small text-black text-start flex flex-row hover:cursor-text"
+            type="password"
+            name="password"
+            onChange={handlePasswordChange}
+            color="black"
+          ></input>
+          <div className="flex flex-row justify-center">
+            <Button
+              intent="primary"
+              text="Conectar"
+              onClick={(event) => {
+                onSubmit(event);
+              }}
+            ></Button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
