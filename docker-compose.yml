@@ -1,0 +1,42 @@
+version: "3"
+
+services:
+  home:
+    container_name: home
+    image: 221082188217.dkr.ecr.us-east-1.amazonaws.com/bytebank-turbo
+    build:
+      context: .
+      dockerfile: ./apps/home/Dockerfile
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - app_network
+  dashboard:
+    container_name: dashboard
+    image: 221082188217.dkr.ecr.us-east-1.amazonaws.com/bytebank-turbo-dashboard
+    build:
+      context: .
+      dockerfile: ./apps/dashboard/Dockerfile
+    restart: always
+    ports:
+      - 3001:3001
+    networks:
+      - app_network
+  login:
+    container_name: login
+    image: 221082188217.dkr.ecr.us-east-1.amazonaws.com/bytebank-turbo-login
+    build:
+      context: .
+      dockerfile: ./apps/login/Dockerfile
+    restart: always
+    ports:
+      - 3002:3002
+    networks:
+      - app_network
+
+# Define a network, which allows containers to communicate
+# with each other, by using their container name as a hostname
+networks:
+  app_network:
+    external: true
