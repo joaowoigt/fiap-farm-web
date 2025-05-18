@@ -1,5 +1,6 @@
 import { AuthRepository } from "../../repositories/auth-repository";
 import { RegisterUseCase } from "./RegisterUseCase";
+import { firebaseAuthRepository } from "../../../data/firebase/Auth/firebase-auth-repository";
 
 export class RegisterUseCaseImpl implements RegisterUseCase {
   constructor(private authRepository: AuthRepository) {
@@ -22,3 +23,7 @@ export class RegisterUseCaseImpl implements RegisterUseCase {
     }
   }
 }
+
+export const registerUseCaseImpl = new RegisterUseCaseImpl(
+  firebaseAuthRepository
+);

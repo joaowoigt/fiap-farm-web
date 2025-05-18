@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Text } from "@repo/ui/texts";
 import { Button } from "@repo/ui/buttons";
-import { LoginRepositoryImpl } from "../../data/repositories/LoginRepositoryImpl";
-import { LoginUseCaseImpl } from "../../domain/useCases/login/LoginUseCaseImpl";
+import { LoginUseCase } from "../../domain/useCases/login/LoginUseCase";
 
-const loginRepository = new LoginRepositoryImpl();
-const loginService = new LoginUseCaseImpl(loginRepository);
+interface LoginFormProps {
+  loginUseCase: LoginUseCase;
+}
 
-export default function LoginForm() {
+export default function LoginForm({ loginUseCase }: LoginFormProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState({
@@ -29,13 +29,18 @@ export default function LoginForm() {
       setError({ show: true, message: "Preencha os campos para prosseguir" });
       return;
     }
-    const token = await loginService.execute(email, password);
-    if (token) {
-      setError({ show: false, message: "" });
-      sessionStorage.setItem("token", token);
-      window.location.href = "/dashboard";
-    } else {
-      setError({ show: true, message: "Email ou senha inválidos" });
+    try {
+      const userResult = await loginUseCase.execute(email, password);
+      if ("user" in userResult) {
+        console.log("Login bem-sucedido", userResult.user);
+        setError({ show: false, message: "" });
+        window.location.href = "/dashboard";
+      } else {
+        setError(userResult);
+      }
+    } catch (error) {
+      console.error("Erro ao fazer login", error);
+      setError({ show: true, message: "Erro ao fazer login" });
     }
   };
   return (

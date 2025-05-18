@@ -7,7 +7,7 @@ import {
   validatePassword,
   validateUserName,
 } from "../observers/Validator";
-import { UiError } from "../../domain/useCases/models/Error";
+import { UiError } from "../../domain/models/Error";
 import RegisterObserver from "../observers/RegisterObserver";
 
 interface RegisterFormProps {
