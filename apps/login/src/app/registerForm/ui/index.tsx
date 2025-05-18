@@ -1,23 +1,34 @@
 import { Text } from "@repo/ui/texts";
 import { Button } from "@repo/ui/buttons";
 
-interface LoginFormScreenProps {
+export interface RegisterFormScreenProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  handleUsernameChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleEmailChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handlePasswordChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   error: { show: boolean; message: string };
+  inputError: { show: boolean; message: string };
+  success: boolean;
 }
 
-export default function LoginFormScreen({
+export default function RegisterFormScreen({
   onSubmit,
+  handleUsernameChange,
   handleEmailChange,
   handlePasswordChange,
   error,
-}: LoginFormScreenProps) {
+  inputError,
+  success,
+}: RegisterFormScreenProps) {
   return (
     <div>
       <div className="flex flex-col items-center  w-[450px] justify-center border-2 border-white p-medium rounded-lg bg-white bg-opacity-10">
-        <Text intent="Heading" color="black" style="bold" text="Login"></Text>
+        <Text
+          intent="Heading"
+          color="black"
+          style="bold"
+          text="Cadastre-se"
+        ></Text>
         {error.show && (
           <Text
             intent="Regular"
@@ -26,12 +37,30 @@ export default function LoginFormScreen({
             text={error.message}
           ></Text>
         )}
+        {inputError.show && (
+          <Text
+            intent="RegultarBorded"
+            color="negative"
+            style="bold"
+            text={inputError.message}
+          ></Text>
+        )}
         <form>
+          <Text intent="Regular" color="black" style="bold" text="Nome"></Text>
+          <input
+            className="outline outline-1 outline-primary  mb-big mt-medium bg-white rounded-md px-small w-[250px]  py-small text-black text-start flex flex-row hover:cursor-text"
+            type="text"
+            name="username"
+            id="userNameInput"
+            onChange={handleUsernameChange}
+            color="black"
+          ></input>
           <Text intent="Regular" color="black" style="bold" text="Email"></Text>
           <input
             className="outline outline-1 outline-primary  mb-big mt-medium bg-white rounded-md px-small w-[250px]  py-small text-black text-start flex flex-row hover:cursor-text"
             type="text"
             name="emailname"
+            id="emailInput"
             onChange={handleEmailChange}
             color="black"
           ></input>
@@ -40,13 +69,22 @@ export default function LoginFormScreen({
             className="outline outline-1 outline-primary  mb-big mt-medium bg-white rounded-md px-small w-[250px]  py-small text-black text-start flex flex-row hover:cursor-text"
             type="password"
             name="password"
+            id="passwordInput"
             onChange={handlePasswordChange}
             color="black"
           ></input>
+          {success && (
+            <Text
+              intent="Regular"
+              color="black"
+              style="bold"
+              text="Usuário cadastrado com sucesso"
+            ></Text>
+          )}
           <div className="flex flex-row justify-center">
             <Button
               intent="primary"
-              text="Conectar"
+              text="Resgistrar"
               onClick={(event) => {
                 onSubmit(event);
               }}

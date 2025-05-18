@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Text } from "@repo/ui/texts";
-import { Button } from "@repo/ui/buttons";
 import { RegisterUseCase } from "../../domain/useCases/register/RegisterUseCase";
 import {
   validateEmail,
@@ -9,12 +7,15 @@ import {
 } from "../observers/Validator";
 import { UiError } from "../../domain/models/uiError";
 import RegisterObserver from "../observers/RegisterObserver";
+import RegisterFormScreen from "./ui";
 
-interface RegisterFormProps {
+interface RegisterFormControllerProps {
   registerUseCase: RegisterUseCase;
 }
 
-export default function RegisterForm({ registerUseCase }: RegisterFormProps) {
+export default function RegisterFormController({
+  registerUseCase,
+}: RegisterFormControllerProps) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -84,77 +85,14 @@ export default function RegisterForm({ registerUseCase }: RegisterFormProps) {
     }
   };
   return (
-    <div>
-      <div className="flex flex-col items-center  w-[450px] justify-center border-2 border-white p-medium rounded-lg bg-white bg-opacity-10">
-        <Text
-          intent="Heading"
-          color="black"
-          style="bold"
-          text="Cadastre-se"
-        ></Text>
-        {error.show && (
-          <Text
-            intent="Regular"
-            color="negative"
-            style="bold"
-            text={error.message}
-          ></Text>
-        )}
-        {inputError.show && (
-          <Text
-            intent="RegultarBorded"
-            color="negative"
-            style="bold"
-            text={inputError.message}
-          ></Text>
-        )}
-        <form>
-          <Text intent="Regular" color="black" style="bold" text="Nome"></Text>
-          <input
-            className="outline outline-1 outline-primary  mb-big mt-medium bg-white rounded-md px-small w-[250px]  py-small text-black text-start flex flex-row hover:cursor-text"
-            type="text"
-            name="username"
-            id="userNameInput"
-            onChange={handleUsernameChange}
-            color="black"
-          ></input>
-          <Text intent="Regular" color="black" style="bold" text="Email"></Text>
-          <input
-            className="outline outline-1 outline-primary  mb-big mt-medium bg-white rounded-md px-small w-[250px]  py-small text-black text-start flex flex-row hover:cursor-text"
-            type="text"
-            name="emailname"
-            id="emailInput"
-            onChange={handleEmailChange}
-            color="black"
-          ></input>
-          <Text intent="Regular" color="black" style="bold" text="Senha"></Text>
-          <input
-            className="outline outline-1 outline-primary  mb-big mt-medium bg-white rounded-md px-small w-[250px]  py-small text-black text-start flex flex-row hover:cursor-text"
-            type="password"
-            name="password"
-            id="passwordInput"
-            onChange={handlePasswordChange}
-            color="black"
-          ></input>
-          {success && (
-            <Text
-              intent="Regular"
-              color="black"
-              style="bold"
-              text="Usuário cadastrado com sucesso"
-            ></Text>
-          )}
-          <div className="flex flex-row justify-center">
-            <Button
-              intent="primary"
-              text="Resgistrar"
-              onClick={(event) => {
-                onSubmit(event);
-              }}
-            ></Button>
-          </div>
-        </form>
-      </div>
-    </div>
+    <RegisterFormScreen
+      onSubmit={onSubmit}
+      handleUsernameChange={handleUsernameChange}
+      handleEmailChange={handleEmailChange}
+      handlePasswordChange={handlePasswordChange}
+      error={error}
+      inputError={inputError}
+      success={success}
+    />
   );
 }

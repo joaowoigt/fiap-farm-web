@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@repo/ui": "*",
-    "axios": "^1.7.9",
     "class-variance-authority": "^0.7.0",
     "crypto": "^1.0.1",
     "firebase": "^11.7.3",
