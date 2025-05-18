@@ -1,18 +1,24 @@
-import { LoginRepository } from "../../../data/repositories/LoginRepository";
+import { AuthRepository } from "../../repositories/auth-repository";
+import { RegisterUseCase } from "./RegisterUseCase";
 
-export class RegisterUseCaseImpl {
-  constructor(private readonly loginRepository: LoginRepository) {}
+export class RegisterUseCaseImpl implements RegisterUseCase {
+  constructor(private authRepository: AuthRepository) {
+    this.authRepository = authRepository;
+  }
 
-  async execute(
-    username: string,
-    email: string,
-    password: string
-  ): Promise<boolean> {
+  async execute(email: string, password: string): Promise<boolean> {
+    if (!email || !password) {
+      throw new Error("Email e senha são obrigatórios");
+    }
     try {
-      return this.loginRepository.register(username, email, password);
-    } catch (error) {
-      console.error(error);
-      throw new Error("Erro ao registrar usuário");
+      const user = await this.authRepository.registerUserWithEmailAndPassword(
+        email,
+        password
+      );
+      return user;
+    } catch (error: any) {
+      console.error("Erro ao registrar usuário", error);
+      throw new Error(`Erro ao registrar usuário: ${error.message}`);
     }
   }
 }

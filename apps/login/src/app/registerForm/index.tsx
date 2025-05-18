@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Text } from "@repo/ui/texts";
 import { Button } from "@repo/ui/buttons";
-import { LoginRepositoryImpl } from "../../data/repositories/LoginRepositoryImpl";
-import { RegisterUseCaseImpl } from "../../domain/useCases/register/RegisterUseCaseImpl";
+import { RegisterUseCase } from "../../domain/useCases/register/RegisterUseCase";
 import {
   validateEmail,
   validatePassword,
@@ -11,10 +10,11 @@ import {
 import { UiError } from "../../domain/useCases/models/Error";
 import RegisterObserver from "../observers/RegisterObserver";
 
-const loginRepository = new LoginRepositoryImpl();
-const registerUseCase = new RegisterUseCaseImpl(loginRepository);
+interface RegisterFormProps {
+  registerUseCase: RegisterUseCase;
+}
 
-export default function RegisterForm() {
+export default function RegisterForm({ registerUseCase }: RegisterFormProps) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -66,17 +66,22 @@ export default function RegisterForm() {
       setError({ show: true, message: "Preencha os campos para prosseguir" });
       return;
     }
-    const successRegister = await registerUseCase.execute(
-      username,
-      email,
-      password
-    );
+    try {
+      await registerUseCase.execute(email, password);
 
-    setError({
-      show: !successRegister,
-      message: "Preencha os campos para prosseguir",
-    });
-    setSuccess(successRegister);
+      setError({
+        show: false,
+        message: "Preencha os campos para prosseguir",
+      });
+      setSuccess(true);
+    } catch (error: any) {
+      console.error(
+        "Erro ao registrar usuário na camada de apresentação",
+        error
+      );
+      setError({ show: true, message: error.message });
+      setSuccess(false);
+    }
   };
   return (
     <div>
