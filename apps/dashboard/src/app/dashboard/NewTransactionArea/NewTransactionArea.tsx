@@ -38,7 +38,7 @@ export default function NewTransactionArea() {
   }
 
   return (
-    <div className="bg-grayVariant h-[420px] rounded-2xl flex flex-col  mx-big p-big mt-big mobile:items-center">
+    <div className="bg-grayVariant h-[420px] rounded-2xl flex flex-col  mx-lg p-lg mt-lg mobile:items-center">
       <Text intent="Heading" color="white" text="Nova transação"></Text>
       <div className="my-extraBig">
         <Dropdown
@@ -52,7 +52,7 @@ export default function NewTransactionArea() {
           onChange(values?.float as number)
         }
         prefix="R$"
-        className="outline outline-1 outline-primary  mb-big mt-medium bg-white rounded-md px-small w-[250px]  py-small text-black text-start flex flex-row hover:cursor-text"
+        className="outline outline-1 outline-primary  mb-6 mt-4 bg-white rounded-md px-3 w-[250px]  py-3 text-black text-start flex flex-row hover:cursor-text"
       />
       <div className="w-[250px] mobile:w-full mobile:items-center mobile:flex mobile:flex-col">
         <Button

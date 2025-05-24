@@ -15,7 +15,7 @@ export default function BalanceArea() {
       <div className="flex flex-row items-center">
         <Text intent="Regular" color="white" text="Saldo"></Text>
         <svg
-          className="w-6 h-6 text-negative ml-big"
+          className="w-6 h-6 text-negative ml-lg"
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -30,7 +30,7 @@ export default function BalanceArea() {
           />
         </svg>
       </div>
-      <div className="bg-negative w-[180px] h-[1px] my-medium"></div>
+      <div className="bg-negative w-[180px] h-[1px] my-base"></div>
       <Text intent="Small" color="white" text="Conta corrente"></Text>
       <Text intent="ExtraHeading" color="white" text={formattedValue}></Text>
     </div>

@@ -8,7 +8,7 @@ export default function HamburguerMenuDashboard() {
     <div>
       {isOpen ? (
         <>
-          <section className="h-fit absolute bg-grey w-[180px] flex flex-col items-center py-small rounded-2xl">
+          <section className="h-fit absolute bg-grey w-[180px] flex flex-col items-center py-3 rounded-2xl">
             <div className="flex flex-row w-full justify-end">
               <CloseIcon onClick={() => setIsOpen(false)}></CloseIcon>
             </div>
@@ -19,24 +19,24 @@ export default function HamburguerMenuDashboard() {
               text="Inicio"
               hover="pointer"
             ></Text>
-            <div className="bg-secondary w-[112px] h-[1px] my-medium"></div>
+            <div className="bg-secondary w-[112px] h-[1px] my-base"></div>
             <Text
               intent="Regular"
-              color="black"
+              color="default"
               text="Transferências"
               hover="pointer"
             ></Text>
-            <div className="bg-black w-[112px] h-[1px] my-medium"></div>
+            <div className="bg-black w-[112px] h-[1px] my-base"></div>
             <Text
               intent="Regular"
-              color="black"
+              color="default"
               text="Investimentos"
               hover="pointer"
             ></Text>
-            <div className="bg-black w-[112px] h-[1px] my-medium"></div>
+            <div className="bg-black w-[112px] h-[1px] my-base"></div>
             <Text
               intent="Regular"
-              color="black"
+              color="default"
               text="Outros serviços"
               hover="pointer"
             ></Text>

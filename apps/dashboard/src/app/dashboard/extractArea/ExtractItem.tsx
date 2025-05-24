@@ -16,7 +16,7 @@ export default function ExtractItem({
   };
   return (
     <div
-      className="flex flex-col mt-big  outline outline-1 outline-primary rounded-md p-big mobile:w-[300px]"
+      className="flex flex-col mt-lg  outline outline-1 outline-primary rounded-md p-lg mobile:w-[300px]"
       key={_id}
     >
       <Text
@@ -25,11 +25,11 @@ export default function ExtractItem({
         text={month}
         style="bold"
       ></Text>
-      <div className="flex flex-row justify-between mt-small mb-small">
-        <Text intent="Small" color="black" text={type}></Text>
+      <div className="flex flex-row justify-between mt-sm mb-sm">
+        <Text intent="Small" color="default" text={type}></Text>
         <Text intent="ExtraSmall" color="darkGray" text={fullDate}></Text>
       </div>
-      <Text intent="Small" color="black" text={value} style="bold"></Text>
+      <Text intent="Small" color="default" text={value} style="bold"></Text>
     </div>
   );
 }

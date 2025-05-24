@@ -10,7 +10,7 @@ const loginUseCase = loginUseCaseImpl;
 
 export default function Page(): JSX.Element {
   return (
-    <div className="bg-gradient-to-b from-gradientStart to-gradientEnd w-auto h-screen flex flex-row p-big items-center justify-evenly">
+    <div className="bg-background w-auto h-screen flex flex-row p-lg items-center justify-evenly">
       <LoginFormController loginUseCase={loginUseCase}></LoginFormController>
       <RegisterFormController
         registerUseCase={registerUseCase}

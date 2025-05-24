@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 export default function DashboardHeader() {
   const name = useSelector((state: any) => state.centerArea.name);
   return (
-    <header className="bg-primary w-auto h-[96px] flex flex-row justify-end items-center pr-[10%] mobile:justify-between mobile:w-full mobile:px-medium">
+    <header className="bg-primary w-auto h-[96px] flex flex-row justify-end items-center pr-[10%] mobile:justify-between mobile:w-full mobile:px-base">
       <div className="mobile:hidden">
         <Text intent="Heading" color="white" text={name}></Text>
       </div>

@@ -3,30 +3,29 @@ import { cva, VariantProps } from "class-variance-authority";
 const textStyles = cva("ui-font-sans", {
   variants: {
     intent: {
-      ExtraHeading: "ui-text-[32px]",
-      Heading: "ui-text-big ",
-      Regular: "ui-text-medium",
+      ExtraHeading: "ui-text-4xl",
+      Heading: "ui-text-lg ",
+      Regular: "ui-text-base",
       RegultarBorded:
-        "ui-text-medium ui-drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]",
-      Small: "ui-text-small",
-      ExtraSmall: "ui-text-extra_small",
+        "ui-text-base ui-drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]",
+      Small: "ui-text-sm",
+      ExtraSmall: "ui-text-xs",
     },
     color: {
       primary: "ui-text-primary",
+      primaryLight: "ui-text-primary-light",
+      secondaryLight: "ui-text-secondary-light",
       secondary: "ui-text-secondary",
-      negative: "ui-text-negative",
-      grey: "ui-text-grey",
-      white: "ui-text-white",
-      black: "ui-text-black",
-      darkGray: "ui-text-darkGray",
+      negative: "ui-text-error",
+      default: "ui-text-text",
     },
     style: {
       bold: "ui-font-bold",
     },
     mt: {
-      big: "ui-mt-big",
-      medium: "ui-mt-medium",
-      small: "ui-mt-small",
+      big: "ui-mt-lg",
+      base: "ui-mt-4",
+      sm: "ui-mt-sm",
     },
     hover: {
       pointer: "ui-hover:cursor-pointer",

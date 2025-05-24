@@ -13,7 +13,7 @@ export function HomeHeader() {
         </div>
       </div>
       <div className="flex flex-row">
-        <div className="w-[180] mr-big">
+        <div className="w-[180] mr-lg">
           <Button intent="secondary" text="">
             <a href="/login">Abrir minha conta</a>
           </Button>
@@ -31,7 +31,7 @@ export function HomeHeader() {
 export function MobileHeader() {
   return (
     <header className="hidden bg-black w-auto h-[96px] items-center justify-around mobile:flex flex-row">
-      <div className="flex flex-row justify-between w-full px-medium">
+      <div className="flex flex-row justify-between w-full px-base">
         <HamburguerMenu></HamburguerMenu>
         <LogoIcon></LogoIcon>
       </div>

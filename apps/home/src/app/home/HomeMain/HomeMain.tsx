@@ -4,12 +4,12 @@ import { Button } from "@repo/ui/buttons";
 
 export default function HomeMain() {
   return (
-    <main className="flex flex-col items-center w-max-[1200px] mt-big mobile:w-full">
+    <main className="flex flex-col items-center w-max-[1200px] mt-lg mobile:w-full">
       <div className="flex flex-row items-center mb-[40px] mobile:w-full mobile:flex-col">
         <div className="w-[434px] mr-[76px] mobile:w-full mobile:mr-0 text-center">
           <Text
             intent="Heading"
-            color="black"
+            color="default"
             style="bold"
             text="Experimente mais liberdade no controle da sua vida financeira. Crie sua conta com a gente!"
           ></Text>
@@ -32,7 +32,7 @@ export default function HomeMain() {
       </div>
       <Text
         intent="Heading"
-        color="black"
+        color="default"
         style="bold"
         text="Vantagens do nosso banco:"
       ></Text>

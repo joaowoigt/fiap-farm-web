@@ -40,10 +40,10 @@ export function Dropdown(props: Props) {
     <>
       <div className="ui-relative">
         <div
-          className="ui-outline ui-outline-1 ui-outline-primary  ui-bg-white ui-rounded-md ui-px-small ui-w-[355px] mobile:ui-w-[270px] ui-py-small ui-text-black ui-text-start ui-flex ui-flex-row ui-justify-between hover:ui-cursor-pointer"
+          className="ui-outline ui-outline-1 ui-outline-primary  ui-bg-white ui-rounded-md ui-px-3 ui-w-[355px] mobile:ui-w-[270px] ui-py-3 ui-text-black ui-text-start ui-flex ui-flex-row ui-justify-between hover:ui-cursor-pointer"
           onClick={toggle}
         >
-          <Text text={selected} intent="Small" color="black"></Text>
+          <Text text={selected} intent="Small" color="default"></Text>
           {isOpen ? (
             <svg
               className="ui-w-6 ui-h-6 ui-text-primary"
@@ -84,7 +84,7 @@ export function Dropdown(props: Props) {
           {menuDropDownItems.map((item) => (
             <a
               key={item.title}
-              className="hover:ui-bg-secondaryVariant  hover:ui-font-semibold hover:ui-cursor-pointer ui-text-black ui-w-[355px] ui-text-center ui-py-small mobile:ui-w-[270px]"
+              className="hover:ui-bg-secondary-light  hover:ui-font-semibold hover:ui-cursor-pointer ui-text-black ui-w-[355px] ui-text-center ui-py-3 mobile:ui-w-[270px]"
               onClick={() => {
                 onItemSelected(item);
                 props.onSelect(item.type);

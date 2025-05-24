@@ -9,7 +9,7 @@ export default function WelcomeArea() {
   return (
     <div className="flex flex-col">
       <Text intent="Heading" color="white" text={welcomeText}></Text>
-      <Text intent="Small" color="white" text={currentDate} mt="big"></Text>
+      <Text intent="Small" color="white" text={currentDate} mt="lg"></Text>
     </div>
   );
 }

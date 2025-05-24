@@ -16,8 +16,8 @@ export default function LoginFormScreen({
 }: LoginFormScreenProps) {
   return (
     <div>
-      <div className="flex flex-col items-center  w-[450px] justify-center border-2 border-white p-medium rounded-lg bg-white bg-opacity-10">
-        <Text intent="Heading" color="black" style="bold" text="Login"></Text>
+      <div className="flex flex-col items-center  w-[450px] justify-center border-2 border-black p-4 rounded-lg bg-white bg-opacity-10">
+        <Text intent="Heading" color="default" style="bold" text="Login"></Text>
         {error.show && (
           <Text
             intent="Regular"
@@ -27,21 +27,31 @@ export default function LoginFormScreen({
           ></Text>
         )}
         <form>
-          <Text intent="Regular" color="black" style="bold" text="Email"></Text>
+          <Text
+            intent="Regular"
+            color="default"
+            style="bold"
+            text="Email"
+          ></Text>
           <input
-            className="outline outline-1 outline-primary  mb-big mt-medium bg-white rounded-md px-small w-[250px]  py-small text-black text-start flex flex-row hover:cursor-text"
+            className="outline outline-1 outline-primary  mb-6 mt-4 bg-white rounded-md px-3 w-[250px]  py-3 text-black text-start flex flex-row hover:cursor-text"
             type="text"
             name="emailname"
             onChange={handleEmailChange}
-            color="black"
+            color="default"
           ></input>
-          <Text intent="Regular" color="black" style="bold" text="Senha"></Text>
+          <Text
+            intent="Regular"
+            color="default"
+            style="bold"
+            text="Senha"
+          ></Text>
           <input
-            className="outline outline-1 outline-primary  mb-big mt-medium bg-white rounded-md px-small w-[250px]  py-small text-black text-start flex flex-row hover:cursor-text"
+            className="outline outline-1 outline-primary  mb-6 mt-4 bg-white rounded-md px-3 w-[250px]  py-3 text-black text-start flex flex-row hover:cursor-text"
             type="password"
             name="password"
             onChange={handlePasswordChange}
-            color="black"
+            color="default"
           ></input>
           <div className="flex flex-row justify-center">
             <Button

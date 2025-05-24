@@ -10,24 +10,24 @@ export default function DasboardSideMenu() {
         text="Inicio"
         hover="pointer"
       ></Text>
-      <div className="bg-secondary w-[112px] h-[1px] my-medium"></div>
+      <div className="bg-secondary w-[112px] h-[1px] my-base"></div>
       <Text
         intent="Regular"
-        color="black"
+        color="default"
         text="Transferências"
         hover="pointer"
       ></Text>
-      <div className="bg-black w-[112px] h-[1px] my-medium"></div>
+      <div className="bg-black w-[112px] h-[1px] my-base"></div>
       <Text
         intent="Regular"
-        color="black"
+        color="default"
         text="Investimentos"
         hover="pointer"
       ></Text>
-      <div className="bg-black w-[112px] h-[1px] my-medium"></div>
+      <div className="bg-black w-[112px] h-[1px] my-base"></div>
       <Text
         intent="Regular"
-        color="black"
+        color="default"
         text="Outros serviços"
         hover="pointer"
       ></Text>

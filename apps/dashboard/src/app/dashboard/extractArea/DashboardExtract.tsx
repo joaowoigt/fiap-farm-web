@@ -15,8 +15,8 @@ export default function DashboardExtractArea(): JSX.Element {
   };
 
   return (
-    <div className="h-fit bg-grey w-[280px] flex flex-col py-[37px] px-big rounded-2xl mobile:items-center mobile:mt-big mobile:w-[312px] mobile:m-big mobile:px-0">
-      <Text intent="Heading" color="black" text="Extrato" style="bold"></Text>
+    <div className="h-fit bg-grey w-[280px] flex flex-col py-[37px] px-lg rounded-2xl mobile:items-center mobile:mt-lg mobile:w-[312px] mobile:m-lg mobile:px-0">
+      <Text intent="Heading" color="default" text="Extrato" style="bold"></Text>
       <FilterDropdown
         onSelect={(item: FilterTypes) => handleFilter(item)}
       ></FilterDropdown>

@@ -43,7 +43,7 @@ export default function ExtractList() {
         ></ExtractItem>
       ))}
       {filter === "All" ? (
-        <div className="flex flex-row mt-big justify-between">
+        <div className="flex flex-row mt-lg justify-between">
           {currentPage <= 1 ? (
             <div></div>
           ) : (

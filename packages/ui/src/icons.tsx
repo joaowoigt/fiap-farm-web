@@ -1,7 +1,7 @@
 import { cva, VariantProps } from "class-variance-authority";
 
 const iconStyles = cva(
-  "ui-bg-primary ui-mr-medium ui-w-fit ui-rounded-full ui-p-small ui-items-center ui-justify-center hover: ui-cursor-pointer"
+  "ui-bg-primary ui-mr-base ui-w-fit ui-rounded-full ui-p-sm ui-items-center ui-justify-center hover: ui-cursor-pointer"
 );
 interface IconProps extends VariantProps<typeof iconStyles> {
   onClick: (event: any) => void;
@@ -370,7 +370,7 @@ export function HamburguerMenuVariant({ onClick }: IconProps) {
 export function ProfileIcon() {
   return (
     <svg
-      className="ui-w-10 ui-h-10 ui-text-negative ui-ml-big"
+      className="ui-w-10 ui-h-10 ui-text-negative ui-ml-lg"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       width="40"
