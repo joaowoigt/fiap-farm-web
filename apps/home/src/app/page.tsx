@@ -5,7 +5,7 @@ import HomeMain from "./home/HomeMain/HomeMain";
 
 export default function Page(): JSX.Element {
   return (
-    <div className="bg-gradient-to-b from-gradientStart to-gradientEnd w-auto h-full flex flex-col">
+    <div className="bg-background w-auto h-full flex flex-col">
       <HomeHeader></HomeHeader>
       <MobileHeader></MobileHeader>
       <HomeMain></HomeMain>

@@ -7,13 +7,13 @@ export function HomeHeader() {
     <header className="bg-black w-auto h-[96px] flex flex-row items-center pr-[10%] justify-around mobile:hidden">
       <div className="flex flex-row items-center w-[50%]">
         <LogoIcon></LogoIcon>
-        <div className="flex flex-row w-[30%] justify-evenly ml-[72px]">
+        <div className="flex flex-row w-[30%] justify-evenly ml-20">
           <Text intent="Regular" color="secondary" text="Sobre"></Text>
           <Text intent="Regular" color="secondary" text="Serviços"></Text>
         </div>
       </div>
       <div className="flex flex-row">
-        <div className="w-[180] mr-lg">
+        <div className="w-[180] mr-6">
           <Button intent="secondary" text="">
             <a href="/login">Abrir minha conta</a>
           </Button>

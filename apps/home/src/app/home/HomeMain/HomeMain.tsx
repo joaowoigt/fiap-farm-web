@@ -5,10 +5,10 @@ import { Button } from "@repo/ui/buttons";
 export default function HomeMain() {
   return (
     <main className="flex flex-col items-center w-max-[1200px] mt-10 mobile:w-full">
-      <div className="flex flex-row items-center mb-[40px] mobile:w-full mobile:flex-col">
-        <div className="w-[434px] mr-[76px] mobile:w-full mobile:mr-0 text-center">
+      <div className="flex flex-row items-center mb-10 mobile:w-full mobile:flex-col">
+        <div className="w-[434px] mr-20 mobile:w-full mobile:mr-0 text-center">
           <Text
-            intent="Heading"
+            intent="ExtraHeading"
             color="default"
             style="bold"
             text="Experimente mais liberdade no controle da sua vida financeira. Crie sua conta com a gente!"
@@ -19,6 +19,7 @@ export default function HomeMain() {
           <Button
             intent="black"
             text="Abrir conta"
+            spacing="mBig"
             onClick={(event) => {
               console.log("clicou no primeiro botao");
             }}
@@ -36,7 +37,7 @@ export default function HomeMain() {
         style="bold"
         text="Vantagens do nosso banco:"
       ></Text>
-      <div className="mt-[40px] flex flex-row justify-evenly mobile:flex-col">
+      <div className="mt-10 flex flex-row justify-evenly mobile:flex-col">
         <AdvantageItem
           title="Conta e cartão gratuitos"
           text="Isso mesmo, nossa conta é digital, sem custo fixo e mais que isso: sem tarifa de manutenção."

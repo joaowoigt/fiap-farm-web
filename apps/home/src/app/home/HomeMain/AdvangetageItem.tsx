@@ -26,16 +26,16 @@ export default function AdvantageItem({ title, text, icon }: AdvantageProps) {
     }
   };
   return (
-    <div className="flex flex-col items-center w-[270px] text-center mr-base">
+    <div className="flex flex-col items-center w-[270px] text-center mr-2">
       <img src={getImage()}></img>
       <Text
         intent="Regular"
-        color="secondary"
+        color="primary"
         text={title}
         style="bold"
         mt="base"
       ></Text>
-      <Text intent="Small" color="darkGray" text={text} mt="base"></Text>
+      <Text intent="Small" color="default" text={text} mt="base"></Text>
     </div>
   );
 }

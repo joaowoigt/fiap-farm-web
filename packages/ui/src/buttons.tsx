@@ -2,7 +2,7 @@
 import { cva, VariantProps } from "class-variance-authority";
 
 const buttonStyles = cva(
-  "ui-font-bold ui-py-[12px] ui-px-[42px] ui-rounded ui-rounded-[12px] mobile:ui-px-3 mobile:ui-w-[144px]",
+  "ui-font-bold ui-py-3 ui-px-10 ui-rounded ui-rounded-[12px] mobile:ui-px-3 mobile:ui-w-[144px]",
   {
     variants: {
       intent: {
@@ -11,13 +11,13 @@ const buttonStyles = cva(
         negative: "ui-bg-error ui-text-white hover:ui-bg-primary-error-light",
         black: "ui-bg-black ui-text-white",
         secondaryVariant:
-          "ui-bg-black ui-text-secondary ui-outline ui-outline-2 ui-outline-secondary  hover:ui-bg-secondary",
+          "ui-bg-black ui-text-secondary ui-outline ui-outline-2 ui-outline-secondary",
         blackVariant:
-          "ui-bg-transparent ui-text-black  ui-outline ui-outline-2 oui-utline-black",
+          "ui-bg-transparent ui-text-black  ui-outline ui-outline-2 ui-utline-black hover:ui-bg-white",
       },
       spacing: {
-        mSmall: "ui-m-sm",
-        mMedium: "ui-m-base",
+        mSmall: "ui-m-1",
+        mMedium: "ui-m-2",
         mBig: "ui-m-6",
       },
       defaultVarians: {
