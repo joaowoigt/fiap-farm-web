@@ -19,21 +19,21 @@ export default function HamburguerMenuDashboard() {
               text="Inicio"
               hover="pointer"
             ></Text>
-            <div className="bg-secondary w-[112px] h-[1px] my-base"></div>
+            <div className="bg-secondary w-[112px] h-[1px] my-2"></div>
             <Text
               intent="Regular"
               color="default"
               text="Transferências"
               hover="pointer"
             ></Text>
-            <div className="bg-black w-[112px] h-[1px] my-base"></div>
+            <div className="bg-black w-[112px] h-[1px] my-2"></div>
             <Text
               intent="Regular"
               color="default"
               text="Investimentos"
               hover="pointer"
             ></Text>
-            <div className="bg-black w-[112px] h-[1px] my-base"></div>
+            <div className="bg-black w-[112px] h-[1px] my-2"></div>
             <Text
               intent="Regular"
               color="default"

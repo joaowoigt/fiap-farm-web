@@ -4,7 +4,7 @@ import { Button } from "@repo/ui/buttons";
 
 export default function HomeMain() {
   return (
-    <main className="flex flex-col items-center w-max-[1200px] mt-lg mobile:w-full">
+    <main className="flex flex-col items-center w-max-[1200px] mt-10 mobile:w-full">
       <div className="flex flex-row items-center mb-[40px] mobile:w-full mobile:flex-col">
         <div className="w-[434px] mr-[76px] mobile:w-full mobile:mr-0 text-center">
           <Text

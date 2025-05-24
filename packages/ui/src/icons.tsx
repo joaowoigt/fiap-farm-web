@@ -370,7 +370,7 @@ export function HamburguerMenuVariant({ onClick }: IconProps) {
 export function ProfileIcon() {
   return (
     <svg
-      className="ui-w-10 ui-h-10 ui-text-negative ui-ml-lg"
+      className="ui-w-10 ui-h-10 ui-text-negative ui-ml-6"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       width="40"

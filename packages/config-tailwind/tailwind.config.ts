@@ -46,14 +46,14 @@ const config: Omit<Config, "content"> = {
       // 📏 Espaçamentos (em rem) - para paddings, margins, gaps
       spacing: {
         "0": "0rem",
-        "1": "0.25rem", // 4px
-        "2": "0.5rem", // 8px
+        "1": "0.25rem", // 4px sm
+        "2": "0.5rem", // 8px base
         "3": "0.75rem", // 12px
-        "4": "1rem", // 16px
+        "4": "1rem", // 16px big
         "5": "1.25rem", // 20px
-        "6": "1.5rem", // 24px
+        "6": "1.5rem", // 24px lg
         "8": "2rem", // 32px
-        "10": "2.5rem", // 40px
+        "10": "2.5rem", // 40px lg
         "12": "3rem", // 48px
         "16": "4rem", // 64px
         "20": "5rem", // 80px

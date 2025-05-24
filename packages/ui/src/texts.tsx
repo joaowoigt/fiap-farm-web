@@ -18,12 +18,13 @@ const textStyles = cva("ui-font-sans", {
       secondary: "ui-text-secondary",
       negative: "ui-text-error",
       default: "ui-text-text",
+      onPrimary: "ui-text-white",
     },
     style: {
       bold: "ui-font-bold",
     },
     mt: {
-      big: "ui-mt-lg",
+      big: "ui-mt-10",
       base: "ui-mt-4",
       sm: "ui-mt-sm",
     },

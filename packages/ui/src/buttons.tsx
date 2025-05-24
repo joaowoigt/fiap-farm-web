@@ -18,7 +18,7 @@ const buttonStyles = cva(
       spacing: {
         mSmall: "ui-m-sm",
         mMedium: "ui-m-base",
-        mBig: "ui-m-lg",
+        mBig: "ui-m-6",
       },
       defaultVarians: {
         intent: "ui-primary",

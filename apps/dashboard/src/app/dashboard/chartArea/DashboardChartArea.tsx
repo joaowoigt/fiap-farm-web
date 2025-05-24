@@ -23,7 +23,7 @@ export default function DashboardChartArea() {
     ],
   };
   return (
-    <section className="bg-primary h-[420px] rounded-2xl flex flex-row  m-lg justify-center p-lg mobile:flex-col mobile:items-center mobile:w-[312]">
+    <section className="bg-primary h-[420px] rounded-2xl flex flex-row  m-6 justify-center p-6 mobile:flex-col mobile:items-center mobile:w-[312]">
       <Pie data={data}></Pie>
     </section>
   );

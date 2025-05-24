@@ -16,7 +16,7 @@ export default function ExtractItem({
   };
   return (
     <div
-      className="flex flex-col mt-lg  outline outline-1 outline-primary rounded-md p-lg mobile:w-[300px]"
+      className="flex flex-col mt-10  outline outline-1 outline-primary rounded-md p-6 mobile:w-[300px]"
       key={_id}
     >
       <Text
@@ -27,7 +27,7 @@ export default function ExtractItem({
       ></Text>
       <div className="flex flex-row justify-between mt-sm mb-sm">
         <Text intent="Small" color="default" text={type}></Text>
-        <Text intent="ExtraSmall" color="darkGray" text={fullDate}></Text>
+        <Text intent="ExtraSmall" color="default" text={fullDate}></Text>
       </div>
       <Text intent="Small" color="default" text={value} style="bold"></Text>
     </div>

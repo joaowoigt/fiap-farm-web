@@ -38,14 +38,14 @@ export default function NewTransactionArea() {
   }
 
   return (
-    <div className="bg-grayVariant h-[420px] rounded-2xl flex flex-col  mx-lg p-lg mt-lg mobile:items-center">
-      <Text intent="Heading" color="white" text="Nova transação"></Text>
-      <div className="my-extraBig">
+    <div className="bg-secondary-light h-[420px] rounded-2xl flex flex-col  mx-6 p-6 mt-10 mobile:items-center">
+      <Text intent="Heading" color="default" text="Nova transação"></Text>
+      <div className="my-8">
         <Dropdown
           onSelect={(item: TransactionType) => onSelectedType(item)}
         ></Dropdown>
       </div>
-      <Text intent="Regular" color="white" text="Valor"></Text>
+      <Text intent="Regular" color="default" text="Valor"></Text>
       <CurrencyInput
         decimalsLimit={2}
         onValueChange={(value, name, values) =>

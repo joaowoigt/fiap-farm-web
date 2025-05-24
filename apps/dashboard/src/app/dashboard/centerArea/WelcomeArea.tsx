@@ -8,8 +8,13 @@ export default function WelcomeArea() {
   const welcomeText = `Olá, ${name} :)`;
   return (
     <div className="flex flex-col">
-      <Text intent="Heading" color="white" text={welcomeText}></Text>
-      <Text intent="Small" color="white" text={currentDate} mt="lg"></Text>
+      <Text intent="ExtraHeading" color="onPrimary" text={welcomeText}></Text>
+      <Text
+        intent="Regular"
+        color="onPrimary"
+        text={currentDate}
+        mt="base"
+      ></Text>
     </div>
   );
 }
