@@ -19,6 +19,7 @@ const config: Omit<Config, "content"> = {
         },
         background: {
           DEFAULT: "#E0E0E0",
+          dark: "#EFECE7",
         },
         error: {
           DEFAULT: "#E53935",
