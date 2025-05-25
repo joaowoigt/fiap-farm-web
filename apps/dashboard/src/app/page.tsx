@@ -21,6 +21,7 @@ import {
   getUserUseCaseImpl,
   GetUserUseCaseImpl,
 } from "../domain/useCases/farm/GetUserUseCaseImpl";
+import { setUser } from "./features/user/userSlice";
 
 const dashboardRepository = new DashboardRepositoryImpl();
 const statementUseCase = new StatementUseCaseImpl(dashboardRepository);
@@ -29,16 +30,19 @@ const getUserUseCase = getUserUseCaseImpl;
 
 export default function Page(): JSX.Element {
   const dispatch = useDispatch();
+  const [name, setName] = useState("");
 
   async function fetchAccount() {
     // farm
     const userId = decrypt(sessionStorage.getItem("farmUser") ?? "");
-    getUserUseCase.execute(userId);
+    const user = await getUserUseCase.execute(userId);
+    dispatch(setUser(user));
+    setName(user?.production[0].product.name ?? "");
 
     // bytebank
     const account = await accountUseCase.execute();
     sessionStorage.setItem("accountId", encrypt(account.id).encryptedData);
-    dispatch(setName(account.name));
+    // dispatch(setName(account.name));
     const statement = await statementUseCase.execute(account.id);
     dispatch(setBalance(statement.balance));
     dispatch(setTransactions(statement.transactions));
@@ -55,7 +59,7 @@ export default function Page(): JSX.Element {
         <div className="flex flex-row  mt-10 w-auto justify-center mobile:flex-col">
           <DasboardSideMenu></DasboardSideMenu>
           <div className=" w-[100%] max-w-[680px] flex flex-col mobile:w-full">
-            <DashboardCenterArea></DashboardCenterArea>
+            <DashboardCenterArea name={name}></DashboardCenterArea>
             <NewTransactionArea></NewTransactionArea>
             <DashboardChartArea></DashboardChartArea>
           </div>

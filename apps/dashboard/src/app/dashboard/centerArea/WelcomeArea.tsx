@@ -1,14 +1,20 @@
 import { Text } from "@repo/ui/texts";
-import React, { useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { UserState } from "../../features/user/userSlice";
+import Production from "../../../domain/models/farm/production/Production";
+import User from "../../../domain/models/farm/user/User";
 
-export default function WelcomeArea() {
-  const name = useSelector((state: any) => state.centerArea.name);
+export default function WelcomeArea({ name }: { name: string }) {
   const [currentDate, setCurrentDate] = useState(getDate());
-  const welcomeText = `Olá, ${name} :)`;
+
   return (
     <div className="flex flex-col">
-      <Text intent="ExtraHeading" color="onPrimary" text={welcomeText}></Text>
+      <Text
+        intent="ExtraHeading"
+        color="onPrimary"
+        text={`Bem-vindo(a), ${name}`}
+      ></Text>
       <Text
         intent="Regular"
         color="onPrimary"

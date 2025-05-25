@@ -2,10 +2,10 @@ import { useSelector } from "react-redux";
 import BalanceArea from "./BalanceArea";
 import WelcomeArea from "./WelcomeArea";
 
-export default function DashboardCenterArea() {
+export default function DashboardCenterArea({ name }: { name: string }) {
   return (
     <section className="bg-primary h-[420px] rounded-2xl flex flex-row  mx-6 justify-between p-6 mobile:flex-col mobile:items-center mobile:w-[312]">
-      <WelcomeArea></WelcomeArea>
+      <WelcomeArea name={name}></WelcomeArea>
       <BalanceArea></BalanceArea>
     </section>
   );
