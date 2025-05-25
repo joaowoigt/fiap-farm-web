@@ -8,8 +8,8 @@ export interface ProductionTableProps {
 
 export default function ProductionTable({ production }: ProductionTableProps) {
   return (
-    <div className="border-2 border-background rounded-lg">
-      <div className="grid grid-cols-3  bg-background p-3 rounded-md">
+    <div className="border-2 w-[70%] h-fit border-background rounded-lg">
+      <div className="grid grid-cols-3  bg-background p-3 rounded-md border-2">
         <Text intent="Regular" color="default" style="bold" text="Name"></Text>
         <Text
           intent="Regular"

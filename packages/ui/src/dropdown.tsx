@@ -3,28 +3,44 @@ import { Text } from "./texts";
 
 export interface DropDownItem {
   title: string;
-  type: any;
+  type: DropDownType;
 }
 
 interface Props {
-  onSelect: (item: any) => void;
+  placeholder: string;
+  menuItems: DropDownItem[];
+  onSelect: (item: DropDownItem) => void;
 }
 
-export enum TransactionType {
-  Credit = "Credit",
-  Debit = "Debit",
+type DropDownType = StatusType | ProductionType;
+
+export enum StatusType {
+  waiting = "waiting",
+  inProgress = "inProgress",
+  done = "done",
 }
 
-const menuDropDownItems: DropDownItem[] = [
-  { title: "Débito", type: TransactionType.Debit },
-  { title: "Crédito", type: TransactionType.Credit },
+export enum ProductionType {
+  crops = "crops",
+  livestock = "livestock",
+  dairy = "dairy",
+}
+
+export const menuStatusDropDownItems: DropDownItem[] = [
+  { title: "Waiting", type: StatusType.waiting },
+  { title: "In Progress", type: StatusType.inProgress },
+  { title: "Done", type: StatusType.done },
+];
+
+export const menuTypeDropDownItems: DropDownItem[] = [
+  { title: "Crops", type: ProductionType.crops },
+  { title: "Livestock", type: ProductionType.livestock },
+  { title: "Dairy", type: ProductionType.dairy },
 ];
 
 export function Dropdown(props: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selected, setSelected] = useState<string>(
-    "Seleceione o tipo de transação"
-  );
+  const [selected, setSelected] = useState<string>(props.placeholder);
   const toggle = () => {
     setIsOpen((old) => !old);
   };
@@ -81,13 +97,13 @@ export function Dropdown(props: Props) {
         <div
           className={`ui-absolute ui-z-30 ui-w-[355px] ui-flex ui-flex-col ui-items-center ui-bg-white ui-rounded-md  ui-outline ui-outline-1 ui-outline-primary  ${transClass} mobile:ui-w-[270px]`}
         >
-          {menuDropDownItems.map((item) => (
+          {props.menuItems.map((item) => (
             <a
               key={item.title}
               className="hover:ui-bg-secondary-light  hover:ui-font-semibold hover:ui-cursor-pointer ui-text-black ui-w-[355px] ui-text-center ui-py-3 mobile:ui-w-[270px]"
               onClick={() => {
                 onItemSelected(item);
-                props.onSelect(item.type);
+                props.onSelect(item);
               }}
             >
               {item.title}

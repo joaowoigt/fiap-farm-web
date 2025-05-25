@@ -39,6 +39,24 @@ const mockedProductionList: Production[] = [
     quantity: 50,
     status: Status.waiting,
   },
+  {
+    product: {
+      name: "Tomate",
+      type: Type.crops,
+      unitValue: 2.5,
+    },
+    quantity: 100,
+    status: Status.inProgress,
+  },
+  {
+    product: {
+      name: "Porco",
+      type: Type.livestock,
+      unitValue: 100.0,
+    },
+    quantity: 20,
+    status: Status.done,
+  },
 ];
 
 const getUserUseCase = getUserUseCaseImpl;
@@ -46,6 +64,8 @@ const getUserUseCase = getUserUseCaseImpl;
 export default function Page(): JSX.Element {
   const [name, setName] = useState("");
   const [showTab, setShowTab] = useState(Tabs.production);
+  const [productionList, setProductionList] =
+    useState<Production[]>(mockedProductionList);
 
   const onProductionClick = () => {
     setShowTab(Tabs.production);
@@ -82,7 +102,13 @@ export default function Page(): JSX.Element {
         />
         <div className="flex flex-col w-full p-4">
           {showTab === Tabs.production && (
-            <ProductionDashboard production={mockedProductionList} />
+            <ProductionDashboard
+              production={productionList}
+              onAddProduction={(newProduction: Production) => {
+                const newList = [...productionList, newProduction];
+                setProductionList(newList);
+              }}
+            />
           )}
           {showTab === Tabs.sales && (
             <div className="text-4xl font-bold mb-4">Sales Dashboard</div>

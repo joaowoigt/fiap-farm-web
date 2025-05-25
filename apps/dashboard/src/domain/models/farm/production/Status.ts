@@ -1,3 +1,5 @@
+import { StatusType } from "@repo/ui/dropdown";
+
 export enum Status {
   waiting = "waiting",
   inProgress = "in Progress",
@@ -16,3 +18,16 @@ export function getStatusFromDb(status: string) {
       throw new Error(`Unknown status: ${status}`);
   }
 }
+
+export const getStatusFromUi = (status: StatusType): Status => {
+  switch (status) {
+    case StatusType.waiting:
+      return Status.waiting;
+    case StatusType.inProgress:
+      return Status.inProgress;
+    case StatusType.done:
+      return Status.done;
+    default:
+      throw new Error(`Unknown status: ${status}`);
+  }
+};
