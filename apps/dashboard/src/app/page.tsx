@@ -16,16 +16,26 @@ import {
   setTransactions,
 } from "./features/transactions/transactionsSlices";
 import store from "./store";
-import { encrypt } from "../data/security/EncryptUtils";
+import { decrypt, encrypt } from "../data/security/EncryptUtils";
+import {
+  getUserUseCaseImpl,
+  GetUserUseCaseImpl,
+} from "../domain/useCases/farm/GetUserUseCaseImpl";
 
 const dashboardRepository = new DashboardRepositoryImpl();
 const statementUseCase = new StatementUseCaseImpl(dashboardRepository);
 const accountUseCase = new AccountUseCaseImpl(dashboardRepository);
+const getUserUseCase = getUserUseCaseImpl;
 
 export default function Page(): JSX.Element {
   const dispatch = useDispatch();
 
   async function fetchAccount() {
+    // farm
+    const userId = decrypt(sessionStorage.getItem("farmUser") ?? "");
+    getUserUseCase.execute(userId);
+
+    // bytebank
     const account = await accountUseCase.execute();
     sessionStorage.setItem("accountId", encrypt(account.id).encryptedData);
     dispatch(setName(account.name));

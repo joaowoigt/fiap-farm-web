@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { LoginUseCase } from "../../domain/useCases/login/LoginUseCase";
 import LoginFormScreen from "./ui";
+import { encrypt } from "../../data/security/EncryptUtils";
 
 interface LoginFormControllerProps {
   loginUseCase: LoginUseCase;
@@ -35,6 +36,10 @@ export default function LoginFormController({
       const userResult = await loginUseCase.execute(email, password);
       if ("user" in userResult) {
         console.log("Login bem-sucedido", userResult.user);
+        sessionStorage.setItem(
+          "farmUser",
+          encrypt(userResult.user.id).encryptedData
+        );
         setError({ show: false, message: "" });
         window.location.href = "/dashboard";
       } else {
