@@ -14,7 +14,8 @@
     "./buttons": "./src/buttons.tsx",
     "./dropdown": "./src/dropdown.tsx",
     "./icons": "./src/icons.tsx",
-    "./filterdropdown": "./src/filterdropdown.tsx"
+    "./filterdropdown": "./src/filterdropdown.tsx",
+    "./statusTag": "./src/statusTag.tsx"
   },
   "license": "MIT",
   "scripts": {
