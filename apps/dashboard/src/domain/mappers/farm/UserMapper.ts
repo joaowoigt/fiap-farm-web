@@ -10,7 +10,7 @@ import Product from "../../models/farm/product/Product";
 import { getTypeFromDb } from "../../models/farm/product/Type";
 import Production from "../../models/farm/production/Production";
 import { getStatusFromDb } from "../../models/farm/production/Status";
-import SalesItem from "../../models/farm/sales/SalesItem";
+import SalesItem, { createSalesItem } from "../../models/farm/sales/SalesItem";
 import User from "../../models/farm/user/User";
 
 export function mapProduct(productResponse: ProductResponse): Product {
@@ -32,10 +32,11 @@ export function mapProduction(
 }
 
 export function mapSales(salesResponse: SalesItemResponse): SalesItem {
-  return {
+  let salesFromResponse = {
     product: mapProduct(salesResponse.product),
     quantity: salesResponse.quantity,
   };
+  return createSalesItem(salesFromResponse.product, salesFromResponse.quantity);
 }
 
 export function mapProductionGoal(
