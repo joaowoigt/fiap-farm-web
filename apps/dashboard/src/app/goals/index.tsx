@@ -1,6 +1,8 @@
 import { Text } from "@repo/ui/texts";
 import Goals from "../../domain/models/farm/goals/Goals";
 import GoalsTable from "./table";
+import Goal from "../../domain/models/farm/goals/ProductionGoal";
+import NewGoals from "./newGoal";
 
 interface GoalsDashboardProps {
   goals: Goals;
@@ -24,7 +26,7 @@ export default function GoalsDashboard({
           salesGoals={goals.salesGoals}
           productionGoals={goals.productionGoals}
         />
-        {/* New Goal form would go here */}
+        <NewGoals onAddGoal={(goal: Goal) => console.log(goal)}></NewGoals>
       </div>
     </div>
   );

@@ -26,6 +26,11 @@ export enum ProductionType {
   dairy = "dairy",
 }
 
+export enum GoalType {
+  production = "production",
+  sales = "sales",
+}
+
 export const menuStatusDropDownItems: DropDownItem[] = [
   { title: "Waiting", type: StatusType.waiting },
   { title: "In Progress", type: StatusType.inProgress },
@@ -36,6 +41,11 @@ export const menuTypeDropDownItems: DropDownItem[] = [
   { title: "Crops", type: ProductionType.crops },
   { title: "Livestock", type: ProductionType.livestock },
   { title: "Dairy", type: ProductionType.dairy },
+];
+
+export const menuGoalTypeDropDownItems: DropDownItem[] = [
+  { title: "Production", type: GoalType.production },
+  { title: "Sales", type: GoalType.sales },
 ];
 
 export function Dropdown(props: Props) {
