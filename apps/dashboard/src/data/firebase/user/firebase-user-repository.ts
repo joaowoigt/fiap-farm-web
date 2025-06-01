@@ -29,30 +29,11 @@ export class FirebaseUserRepository implements UserRepository {
     } else {
       console.log("No such document!");
       const emptyUser: UserResponse = {
-        sales: [
-          {
-            product: {
-              name: "Porco",
-              type: "livestock",
-              unitValue: 100,
-            },
-            quantity: 10,
-          },
-        ],
-        production: [
-          {
-            product: {
-              name: "Porco",
-              type: "livestock",
-              unitValue: 100,
-            },
-            quantity: 20,
-            status: "inProgress",
-          },
-        ],
+        sales: [],
+        production: [],
         goals: {
-          productionGoals: [{ type: "livestock", quantity: 30 }],
-          salesGoals: [{ type: "livestock", income: 50 }],
+          productionGoals: [],
+          salesGoals: [],
         },
       };
       setDoc(userDocRef, emptyUser);

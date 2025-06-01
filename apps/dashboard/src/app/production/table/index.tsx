@@ -24,6 +24,15 @@ export default function ProductionTable({ production }: ProductionTableProps) {
           text="Status"
         ></Text>
       </div>
+      {production.length === 0 && (
+        <div className="p-3">
+          <Text
+            intent="Small"
+            color="default"
+            text="No production found. Add your first item to keep track of your farm's production."
+          />
+        </div>
+      )}
       {production.map((item, index) => (
         <div key={index}>
           <ProductionItemTable production={item} />

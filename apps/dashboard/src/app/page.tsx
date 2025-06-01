@@ -10,64 +10,13 @@ import { Type } from "../domain/models/farm/product/Type";
 import { Status } from "../domain/models/farm/production/Status";
 import { addProductionUseCaseImpl } from "../domain/useCases/farm/production/AddProductionUseCaseImpls";
 
-// Mocks
-
-const mockedProductionList: Production[] = [
-  {
-    product: {
-      name: "Tomate",
-      type: Type.crops,
-      unitValue: 2.5,
-    },
-    quantity: 100,
-    status: Status.inProgress,
-  },
-  {
-    product: {
-      name: "Porco",
-      type: Type.livestock,
-      unitValue: 100.0,
-    },
-    quantity: 20,
-    status: Status.done,
-  },
-  {
-    product: {
-      name: "Leite",
-      type: Type.dairy,
-      unitValue: 10.0,
-    },
-    quantity: 50,
-    status: Status.waiting,
-  },
-  {
-    product: {
-      name: "Tomate",
-      type: Type.crops,
-      unitValue: 2.5,
-    },
-    quantity: 100,
-    status: Status.inProgress,
-  },
-  {
-    product: {
-      name: "Porco",
-      type: Type.livestock,
-      unitValue: 100.0,
-    },
-    quantity: 20,
-    status: Status.done,
-  },
-];
-
 const getUserUseCase = getUserUseCaseImpl;
 const addProductionUseCase = addProductionUseCaseImpl;
 
 export default function Page(): JSX.Element {
   const [name, setName] = useState("");
   const [showTab, setShowTab] = useState(Tabs.production);
-  const [productionList, setProductionList] =
-    useState<Production[]>(mockedProductionList);
+  const [productionList, setProductionList] = useState<Production[]>([]);
 
   const onProductionClick = () => {
     setShowTab(Tabs.production);
@@ -88,6 +37,16 @@ export default function Page(): JSX.Element {
     const userId = decrypt(sessionStorage.getItem("farmUser") ?? "");
     const user = await getUserUseCase.execute(userId);
     setName(user?.production[0].product.name ?? "");
+    setProductionList(user?.production ?? []);
+  }
+
+  async function addProduction(newProduction: Production): Promise<boolean> {
+    const userId = decrypt(sessionStorage.getItem("farmUser") ?? "");
+    const success = await addProductionUseCase.execute(userId, newProduction);
+    if (success) {
+      setProductionList((prev) => [...prev, newProduction]);
+    }
+    return success;
   }
 
   useEffect(() => {
@@ -107,10 +66,7 @@ export default function Page(): JSX.Element {
             <ProductionDashboard
               production={productionList}
               onAddProduction={(newProduction: Production) => {
-                return addProductionUseCase.execute(
-                  decrypt(sessionStorage.getItem("farmUser") ?? ""),
-                  newProduction
-                );
+                return addProduction(newProduction);
               }}
             />
           )}
