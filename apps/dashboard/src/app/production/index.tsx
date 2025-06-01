@@ -5,7 +5,7 @@ import NewProduction from "./newProduction";
 
 interface ProductionDashboardProps {
   production: Production[];
-  onAddProduction: (production: Production) => void;
+  onAddProduction: (production: Production) => Promise<boolean>;
 }
 
 export default function ProductionDashboard({

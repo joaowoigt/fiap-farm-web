@@ -8,6 +8,7 @@ import ProductionDashboard from "./production";
 import Production from "../domain/models/farm/production/Production";
 import { Type } from "../domain/models/farm/product/Type";
 import { Status } from "../domain/models/farm/production/Status";
+import { addProductionUseCaseImpl } from "../domain/useCases/farm/production/AddProductionUseCaseImpls";
 
 // Mocks
 
@@ -60,6 +61,7 @@ const mockedProductionList: Production[] = [
 ];
 
 const getUserUseCase = getUserUseCaseImpl;
+const addProductionUseCase = addProductionUseCaseImpl;
 
 export default function Page(): JSX.Element {
   const [name, setName] = useState("");
@@ -95,7 +97,7 @@ export default function Page(): JSX.Element {
     <div className="bg-background h-full flex flex-col mobile:w-full">
       <div className="bg-white flex flex-col items-center h-full m-10 border-2 border-primary rounded-lg shadow-lg">
         <Header
-          name="João Farm"
+          name={name}
           onProductionClick={onProductionClick}
           onSalesClick={onSalesClick}
           onGoalsClick={onGoalsClick}
@@ -105,8 +107,10 @@ export default function Page(): JSX.Element {
             <ProductionDashboard
               production={productionList}
               onAddProduction={(newProduction: Production) => {
-                const newList = [...productionList, newProduction];
-                setProductionList(newList);
+                return addProductionUseCase.execute(
+                  decrypt(sessionStorage.getItem("farmUser") ?? ""),
+                  newProduction
+                );
               }}
             />
           )}

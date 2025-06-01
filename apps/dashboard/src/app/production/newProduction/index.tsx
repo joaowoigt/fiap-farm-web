@@ -15,7 +15,7 @@ import { getTypeFromUi } from "../../../domain/models/farm/product/Type";
 import { getStatusFromUi } from "../../../domain/models/farm/production/Status";
 
 interface NewProductionProps {
-  onAddProduction: (production: Production) => void;
+  onAddProduction: (production: Production) => Promise<boolean>;
 }
 
 export default function NewProduction({ onAddProduction }: NewProductionProps) {
@@ -24,8 +24,17 @@ export default function NewProduction({ onAddProduction }: NewProductionProps) {
   const [status, setStatus] = useState<StatusType>(StatusType.inProgress);
   const [unitValue, setUnitValue] = useState(0);
   const [type, setType] = useState(ProductionType.crops);
+  const [success, setSuccess] = useState(false);
 
-  const handleAddProduction = () => {
+  const clearFields = () => {
+    console.log("Clearing fields");
+    setProductName("");
+    setQuantity(0);
+    setStatus(StatusType.inProgress);
+    setUnitValue(0);
+    setType(ProductionType.crops);
+  };
+  const handleAddProduction = async () => {
     const production: Production = {
       product: {
         name: productName,
@@ -35,8 +44,17 @@ export default function NewProduction({ onAddProduction }: NewProductionProps) {
       quantity: quantity,
       status: getStatusFromUi(status),
     };
-    onAddProduction(production);
+    let success = await onAddProduction(production);
+    if (!success) {
+      console.error("Failed to add production");
+      return;
+    }
     console.log("Production added:", production);
+    clearFields();
+    setSuccess(true);
+    setTimeout(() => {
+      setSuccess(false);
+    }, 3000); // Clear success message after 3 seconds
   };
   return (
     <div className="flex flex-col border-2 h-fit border-background rounded-lg mx-3 p-3">
@@ -58,6 +76,7 @@ export default function NewProduction({ onAddProduction }: NewProductionProps) {
         onChange={(event: any) => setProductName(event.target.value)}
         placeholder="Enter the product name"
         color="default"
+        value={productName}
       ></input>
       <input
         className="outline outline-1 outline-primary mb-6 bg-white rounded-md px-3 w-full  py-3 text-black text-start flex flex-row hover:cursor-text"
@@ -66,6 +85,7 @@ export default function NewProduction({ onAddProduction }: NewProductionProps) {
         placeholder="Enter the product quantity"
         onChange={(event: any) => setQuantity(event.target.value)}
         color="default"
+        value={quantity !== 0 ? quantity : ""}
       ></input>
       <CurrencyInput
         placeholder="Enter the product unit value"
@@ -73,6 +93,7 @@ export default function NewProduction({ onAddProduction }: NewProductionProps) {
         onValueChange={(value, name, values) =>
           setUnitValue(values?.float as number)
         }
+        value={unitValue !== 0 ? unitValue : ""}
         prefix="R$"
         className="outline outline-1 outline-primary  mb-6 mt-medium bg-white rounded-md px-3  py-3 text-black text-start flex flex-row hover:cursor-text"
       />
@@ -94,6 +115,11 @@ export default function NewProduction({ onAddProduction }: NewProductionProps) {
       </div>
 
       <div className="mt-3 flex justify-end">
+        <Text
+          intent="Small"
+          color="default"
+          text={success ? "Production added successfully!" : ""}
+        ></Text>
         <Button
           intent="secondary"
           onClick={handleAddProduction}
