@@ -41,7 +41,7 @@ export default function NewProduction({ onAddProduction }: NewProductionProps) {
         type: getTypeFromUi(type),
         unitValue: unitValue,
       },
-      quantity: quantity,
+      quantity: Number(quantity),
       status: getStatusFromUi(status),
     };
     let success = await onAddProduction(production);

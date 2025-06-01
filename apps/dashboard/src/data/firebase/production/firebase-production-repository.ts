@@ -2,6 +2,8 @@ import Production from "../../../domain/models/farm/production/Production";
 import { ProductionRepository } from "../../../domain/repositories/production-repository";
 import { doc, Firestore, getDoc, setDoc } from "@firebase/firestore";
 import { db } from "../clientApp";
+import User from "../../../domain/models/farm/user/User";
+import Goal from "../../../domain/models/farm/goals/ProductionGoal";
 
 export class FirebaseProductionRepository implements ProductionRepository {
   private db: Firestore;
@@ -26,6 +28,15 @@ export class FirebaseProductionRepository implements ProductionRepository {
       const userData = userDocSnap.data();
       if (!userData.production) {
         userData.production = [];
+      }
+
+      const goalsIndex = userData.goals?.productionGoals.findIndex(
+        (goal: Goal) => goal.type === production.product.type
+      );
+      if (goalsIndex !== -1 && production.status === "done") {
+        userData.goals.productionGoals[goalsIndex].current =
+          parseInt(userData.goals.productionGoals[goalsIndex].current) +
+          production.quantity;
       }
 
       userData.production.push(production);
