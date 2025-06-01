@@ -6,3 +6,13 @@ export default interface Production {
   quantity: number;
   status: Status;
 }
+
+export function getAllAvailableProducts(productions: Production[]): Product[] {
+  let allProducts: Product[] = [];
+
+  productions.forEach((production) => {
+    allProducts.push(production.product);
+  });
+
+  return allProducts;
+}

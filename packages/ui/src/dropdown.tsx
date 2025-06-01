@@ -12,7 +12,7 @@ interface Props {
   onSelect: (item: DropDownItem) => void;
 }
 
-type DropDownType = StatusType | ProductionType;
+type DropDownType = StatusType | ProductionType | string;
 
 export enum StatusType {
   waiting = "waiting",

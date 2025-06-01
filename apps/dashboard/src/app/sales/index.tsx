@@ -1,12 +1,13 @@
 import { Text } from "@repo/ui/texts";
-import Production from "../../domain/models/farm/production/Production";
 import SalesItem from "../../domain/models/farm/sales/SalesItem";
 import SalesTable from "./table";
+import NewSales from "./newSales";
+import Product from "../../domain/models/farm/product/Product";
 
 interface SalesDashboardProps {
   sales: SalesItem[];
-  products: Production[];
-  onAddSale: (sale: SalesItem) => Promise<boolean>;
+  products: Product[];
+  onAddSale: (product: Product, quantity: number) => Promise<boolean>;
 }
 
 export default function SalesDashboard({
@@ -24,7 +25,7 @@ export default function SalesDashboard({
       ></Text>
       <div className="flex flex-row">
         <SalesTable sales={sales} />
-        {/* New Sale Component would go here */}
+        <NewSales products={products} onAddSale={onAddSale} />
       </div>
     </div>
   );

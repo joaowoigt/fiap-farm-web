@@ -5,7 +5,9 @@ import { getUserUseCaseImpl } from "../domain/useCases/farm/GetUserUseCaseImpl";
 import Header from "./header";
 import Tabs from "./tabsUtils";
 import ProductionDashboard from "./production";
-import Production from "../domain/models/farm/production/Production";
+import Production, {
+  getAllAvailableProducts,
+} from "../domain/models/farm/production/Production";
 import { Type } from "../domain/models/farm/product/Type";
 import { Status } from "../domain/models/farm/production/Status";
 import { addProductionUseCaseImpl } from "../domain/useCases/farm/production/AddProductionUseCaseImpls";
@@ -77,7 +79,7 @@ export default function Page(): JSX.Element {
           {showTab === Tabs.sales && (
             <SalesDashboard
               sales={salesList}
-              products={productionList}
+              products={getAllAvailableProducts(productionList)}
               onAddSale={async (sale) => {
                 // Handle adding a new sale
                 return true;
