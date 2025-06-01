@@ -7,9 +7,10 @@ export default interface SalesItem {
 }
 export function createSalesItem(product: Product, quantity: number): SalesItem {
   let income = product.unitValue * quantity;
-  return {
+  let salesItem = {
     product,
-    quantity,
+    quantity: Number(quantity),
     income,
   };
+  return salesItem;
 }

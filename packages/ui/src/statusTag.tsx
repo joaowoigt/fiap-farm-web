@@ -7,8 +7,8 @@ export default function StatusTag({ status }: StatusTagProps) {
     done: "ui-bg-primary",
     "in Progress": "ui-bg-secondary",
     livestock: "ui-bg-primary",
-    crop: "ui-bg-secondary",
-    dairy: "ui-bg-secondary-light",
+    crops: "ui-bg-secondary",
+    dairy: "ui-bg-primary-light",
     waiting: "ui-bg-error",
   };
   const statusClass = statusColor[status] || "ui-bg-error";

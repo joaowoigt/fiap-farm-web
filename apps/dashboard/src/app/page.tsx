@@ -68,7 +68,7 @@ export default function Page(): JSX.Element {
     const salesItem = createSalesItem(product, quantity);
     const success = await addSalesItemUseCase.execute(userId, salesItem);
     if (success) {
-      setSalesList((prev) => [...prev, salesItem]);
+      fetchAccount();
     }
     return success;
   }

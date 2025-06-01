@@ -21,11 +21,26 @@ export class FirebaseSalesRepository implements SalesRepository {
       }
 
       const userData = userDocSnap.data();
-      if (!userData.production) {
-        userData.production = [];
+      let updatedList: SalesItem[];
+      if (
+        userData.sales.some(
+          (item: SalesItem) => item.product.name === salesItem.product.name
+        )
+      ) {
+        updatedList = userData.sales.map((item: SalesItem) => {
+          if (item.product.name === salesItem.product.name) {
+            const updatedItem = { ...item };
+            updatedItem.quantity += salesItem.quantity;
+            updatedItem.income =
+              updatedItem.quantity * updatedItem.product.unitValue;
+            return updatedItem;
+          }
+          return item;
+        });
+      } else {
+        updatedList = [...userData.sales, salesItem];
       }
-
-      userData.sales.push(salesItem);
+      userData.sales = updatedList;
       await setDoc(userDocRef, userData, { merge: true });
       return true;
     } catch (error) {
