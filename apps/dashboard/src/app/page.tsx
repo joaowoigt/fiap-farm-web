@@ -9,6 +9,8 @@ import Production from "../domain/models/farm/production/Production";
 import { Type } from "../domain/models/farm/product/Type";
 import { Status } from "../domain/models/farm/production/Status";
 import { addProductionUseCaseImpl } from "../domain/useCases/farm/production/AddProductionUseCaseImpls";
+import SalesDashboard from "./sales";
+import SalesItem from "../domain/models/farm/sales/SalesItem";
 
 const getUserUseCase = getUserUseCaseImpl;
 const addProductionUseCase = addProductionUseCaseImpl;
@@ -17,6 +19,7 @@ export default function Page(): JSX.Element {
   const [name, setName] = useState("");
   const [showTab, setShowTab] = useState(Tabs.production);
   const [productionList, setProductionList] = useState<Production[]>([]);
+  const [salesList, setSalesList] = useState<SalesItem[]>([]);
 
   const onProductionClick = () => {
     setShowTab(Tabs.production);
@@ -38,6 +41,7 @@ export default function Page(): JSX.Element {
     const user = await getUserUseCase.execute(userId);
     setName(user?.production[0].product.name ?? "");
     setProductionList(user?.production ?? []);
+    setSalesList(user?.sales ?? []);
   }
 
   async function addProduction(newProduction: Production): Promise<boolean> {
@@ -71,7 +75,14 @@ export default function Page(): JSX.Element {
             />
           )}
           {showTab === Tabs.sales && (
-            <div className="text-4xl font-bold mb-4">Sales Dashboard</div>
+            <SalesDashboard
+              sales={salesList}
+              products={productionList}
+              onAddSale={async (sale) => {
+                // Handle adding a new sale
+                return true;
+              }}
+            />
           )}
           {showTab === Tabs.goals && (
             <div className="text-4xl font-bold mb-4">Goals Dashboard</div>

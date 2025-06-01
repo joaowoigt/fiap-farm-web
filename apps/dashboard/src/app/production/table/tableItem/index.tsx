@@ -1,7 +1,6 @@
 import { Text } from "@repo/ui/texts";
 import Production from "../../../../domain/models/farm/production/Production";
 import StatusTag from "@repo/ui/statusTag";
-import { Status } from "../../../../domain/models/farm/production/Status";
 
 export interface ProductionItemTableProps {
   production: Production;
