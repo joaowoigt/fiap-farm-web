@@ -12,10 +12,15 @@ import { Type } from "../domain/models/farm/product/Type";
 import { Status } from "../domain/models/farm/production/Status";
 import { addProductionUseCaseImpl } from "../domain/useCases/farm/production/AddProductionUseCaseImpls";
 import SalesDashboard from "./sales";
-import SalesItem from "../domain/models/farm/sales/SalesItem";
+import SalesItem, {
+  createSalesItem,
+} from "../domain/models/farm/sales/SalesItem";
+import { addSalesItemUseCaseImpl } from "../domain/useCases/farm/sales/AddSalesItemUseCaseImpl";
+import Product from "../domain/models/farm/product/Product";
 
 const getUserUseCase = getUserUseCaseImpl;
 const addProductionUseCase = addProductionUseCaseImpl;
+const addSalesItemUseCase = addSalesItemUseCaseImpl;
 
 export default function Page(): JSX.Element {
   const [name, setName] = useState("");
@@ -55,6 +60,19 @@ export default function Page(): JSX.Element {
     return success;
   }
 
+  async function addSalesItem(
+    product: Product,
+    quantity: number
+  ): Promise<boolean> {
+    const userId = decrypt(sessionStorage.getItem("farmUser") ?? "");
+    const salesItem = createSalesItem(product, quantity);
+    const success = await addSalesItemUseCase.execute(userId, salesItem);
+    if (success) {
+      setSalesList((prev) => [...prev, salesItem]);
+    }
+    return success;
+  }
+
   useEffect(() => {
     fetchAccount();
   }, []);
@@ -80,10 +98,9 @@ export default function Page(): JSX.Element {
             <SalesDashboard
               sales={salesList}
               products={getAllAvailableProducts(productionList)}
-              onAddSale={async (sale) => {
-                // Handle adding a new sale
-                return true;
-              }}
+              onAddSale={(product: Product, quantity: number) =>
+                addSalesItem(product, quantity)
+              }
             />
           )}
           {showTab === Tabs.goals && (
