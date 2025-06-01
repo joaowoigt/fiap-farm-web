@@ -17,6 +17,7 @@ import SalesItem, {
 } from "../domain/models/farm/sales/SalesItem";
 import { addSalesItemUseCaseImpl } from "../domain/useCases/farm/sales/AddSalesItemUseCaseImpl";
 import Product from "../domain/models/farm/product/Product";
+import Loading from "./loading";
 
 const getUserUseCase = getUserUseCaseImpl;
 const addProductionUseCase = addProductionUseCaseImpl;
@@ -27,6 +28,7 @@ export default function Page(): JSX.Element {
   const [showTab, setShowTab] = useState(Tabs.production);
   const [productionList, setProductionList] = useState<Production[]>([]);
   const [salesList, setSalesList] = useState<SalesItem[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const onProductionClick = () => {
     setShowTab(Tabs.production);
@@ -44,11 +46,13 @@ export default function Page(): JSX.Element {
   };
 
   async function fetchAccount() {
+    setLoading(true);
     const userId = decrypt(sessionStorage.getItem("farmUser") ?? "");
     const user = await getUserUseCase.execute(userId);
     setName(user?.production[0].product.name ?? "");
     setProductionList(user?.production ?? []);
     setSalesList(user?.sales ?? []);
+    setLoading(false);
   }
 
   async function addProduction(newProduction: Production): Promise<boolean> {
@@ -85,28 +89,32 @@ export default function Page(): JSX.Element {
           onSalesClick={onSalesClick}
           onGoalsClick={onGoalsClick}
         />
-        <div className="flex flex-col w-full p-4">
-          {showTab === Tabs.production && (
-            <ProductionDashboard
-              production={productionList}
-              onAddProduction={(newProduction: Production) => {
-                return addProduction(newProduction);
-              }}
-            />
-          )}
-          {showTab === Tabs.sales && (
-            <SalesDashboard
-              sales={salesList}
-              products={getAllAvailableProducts(productionList)}
-              onAddSale={(product: Product, quantity: number) =>
-                addSalesItem(product, quantity)
-              }
-            />
-          )}
-          {showTab === Tabs.goals && (
-            <div className="text-4xl font-bold mb-4">Goals Dashboard</div>
-          )}
-        </div>
+        {loading && Loading()}
+
+        {!loading && (
+          <div className="flex flex-col w-full p-4">
+            {showTab === Tabs.production && (
+              <ProductionDashboard
+                production={productionList}
+                onAddProduction={(newProduction: Production) => {
+                  return addProduction(newProduction);
+                }}
+              />
+            )}
+            {showTab === Tabs.sales && (
+              <SalesDashboard
+                sales={salesList}
+                products={getAllAvailableProducts(productionList)}
+                onAddSale={(product: Product, quantity: number) =>
+                  addSalesItem(product, quantity)
+                }
+              />
+            )}
+            {showTab === Tabs.goals && (
+              <div className="text-4xl font-bold mb-4">Goals Dashboard</div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
