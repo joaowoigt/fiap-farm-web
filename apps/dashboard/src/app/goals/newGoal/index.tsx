@@ -11,9 +11,10 @@ import {
   ProductionType,
 } from "@repo/ui/dropdown";
 import CurrencyInput from "react-currency-input-field";
+import { getTypeFromUi } from "../../../domain/models/farm/product/Type";
 
 interface NewGoalsProps {
-  onAddGoal: (goal: Goal) => void;
+  onAddGoal: (goal: Goal, goalType: string) => Promise<boolean>;
 }
 
 export default function NewGoals({ onAddGoal }: NewGoalsProps) {
@@ -22,6 +23,16 @@ export default function NewGoals({ onAddGoal }: NewGoalsProps) {
   const [quantity, setQuantity] = useState<number>(0);
   const [goalValue, setGoalValue] = useState<number>(0);
   const [success, setSuccess] = useState<boolean>(false);
+
+  async function handleAddGoal() {
+    const newGoal: Goal = {
+      type: getTypeFromUi(type),
+      goal: goalType === GoalType.production ? quantity : goalValue,
+      current: 0,
+    };
+    const result = await onAddGoal(newGoal, goalType);
+    setSuccess(result);
+  }
 
   return (
     <div className="flex flex-col border-2 h-fit border-background rounded-lg mx-3 p-3">
@@ -86,7 +97,11 @@ export default function NewGoals({ onAddGoal }: NewGoalsProps) {
           color="default"
           text={success ? "Sale added successfully!" : ""}
         ></Text>
-        <Button intent="secondary" onClick={onAddGoal} text="Add Sale"></Button>
+        <Button
+          intent="secondary"
+          onClick={handleAddGoal}
+          text="Add Sale"
+        ></Button>
       </div>
     </div>
   );

@@ -18,25 +18,15 @@ import Product from "../domain/models/farm/product/Product";
 import Loading from "./loading";
 import GoalsDashboard from "./goals";
 import Goals from "../domain/models/farm/goals/Goals";
-import { Type } from "../domain/models/farm/product/Type";
+import { addGoalUseCaseImpl } from "../domain/useCases/farm/goals/AddGoalUseCaseImpl";
+import Goal from "../domain/models/farm/goals/ProductionGoal";
 
 const getUserUseCase = getUserUseCaseImpl;
 const addProductionUseCase = addProductionUseCaseImpl;
 const addSalesItemUseCase = addSalesItemUseCaseImpl;
+const addGoalsUseCase = addGoalUseCaseImpl;
 
 const emptyGoals: Goals = { productionGoals: [], salesGoals: [] };
-
-// Mock
-const mockedGoals: Goals = {
-  productionGoals: [
-    { type: Type.crops, goal: 100, current: 50 },
-    { type: Type.livestock, goal: 200, current: 150 },
-  ],
-  salesGoals: [
-    { type: Type.crops, goal: 5000, current: 3000 },
-    { type: Type.livestock, goal: 10000, current: 7000 },
-  ],
-};
 
 export default function Page(): JSX.Element {
   const [name, setName] = useState("");
@@ -94,6 +84,15 @@ export default function Page(): JSX.Element {
     return success;
   }
 
+  async function addGoal(newGoal: Goal, goalType: string): Promise<boolean> {
+    const userId = decrypt(sessionStorage.getItem("farmUser") ?? "");
+    const success = await addGoalsUseCase.execute(userId, newGoal, goalType);
+    if (success) {
+      fetchAccount();
+    }
+    return success;
+  }
+
   useEffect(() => {
     fetchAccount();
   }, []);
@@ -127,7 +126,9 @@ export default function Page(): JSX.Element {
                 }
               />
             )}
-            {showTab === Tabs.goals && <GoalsDashboard goals={mockedGoals} />}
+            {showTab === Tabs.goals && (
+              <GoalsDashboard goals={goals} onAddGoal={addGoal} />
+            )}
           </div>
         )}
       </div>

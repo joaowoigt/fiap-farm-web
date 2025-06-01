@@ -1,5 +1,4 @@
-import ProductionGoalResponse from "../../../data/responses/farm/goals/ProductionGoalResponse";
-import SalesGoalResponse from "../../../data/responses/farm/goals/SalesGoalResponse";
+import { GoalResponse } from "../../../data/responses/farm/goals/ProductionGoalResponse";
 import ProductResponse from "../../../data/responses/farm/product/ProductResponse";
 import ProductionResponse from "../../../data/responses/farm/production/ProductionResponse";
 import SalesItemResponse from "../../../data/responses/farm/sales/SalesItemResponse";
@@ -39,19 +38,11 @@ export function mapSales(salesResponse: SalesItemResponse): SalesItem {
   return createSalesItem(salesFromResponse.product, salesFromResponse.quantity);
 }
 
-export function mapProductionGoal(
-  productionGoalResponse: ProductionGoalResponse
-): ProductionGoal {
+export function mapGoal(goalResponse: GoalResponse): ProductionGoal {
   return {
-    type: getTypeFromDb(productionGoalResponse.type),
-    quantity: productionGoalResponse.quantity,
-  };
-}
-
-export function mapSalesGoal(salesGoalResponse: SalesGoalResponse): SalesGoal {
-  return {
-    type: getTypeFromDb(salesGoalResponse.type),
-    income: salesGoalResponse.income,
+    current: goalResponse.current,
+    type: getTypeFromDb(goalResponse.type),
+    goal: goalResponse.goal,
   };
 }
 
@@ -60,9 +51,8 @@ export function mapUser(userResponse: UserResponse): User {
     sales: userResponse.sales.map(mapSales),
     production: userResponse.production.map(mapProduction),
     goals: {
-      productionGoals:
-        userResponse.goals.productionGoals.map(mapProductionGoal),
-      salesGoals: userResponse.goals.salesGoals.map(mapSalesGoal),
+      productionGoals: userResponse.goals.productionGoals.map(mapGoal),
+      salesGoals: userResponse.goals.salesGoals.map(mapGoal),
     },
   };
 }

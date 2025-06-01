@@ -1,4 +1,5 @@
-export default interface ProductionGoalResponse {
+export interface GoalResponse {
+  current: number;
   type: string;
-  quantity: number;
+  goal: number;
 }

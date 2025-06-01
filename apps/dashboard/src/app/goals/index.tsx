@@ -6,12 +6,12 @@ import NewGoals from "./newGoal";
 
 interface GoalsDashboardProps {
   goals: Goals;
-  //   onAddGoal: (newGoal: Goals) => Promise<boolean>;
+  onAddGoal: (newGoal: Goal, goalType: string) => Promise<boolean>;
 }
 
 export default function GoalsDashboard({
   goals,
-  //   onAddGoal,
+  onAddGoal,
 }: GoalsDashboardProps) {
   return (
     <div className="flex flex-col">
@@ -26,7 +26,7 @@ export default function GoalsDashboard({
           salesGoals={goals.salesGoals}
           productionGoals={goals.productionGoals}
         />
-        <NewGoals onAddGoal={(goal: Goal) => console.log(goal)}></NewGoals>
+        <NewGoals onAddGoal={onAddGoal}></NewGoals>
       </div>
     </div>
   );
