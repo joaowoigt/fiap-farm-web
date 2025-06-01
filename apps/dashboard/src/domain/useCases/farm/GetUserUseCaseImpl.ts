@@ -1,4 +1,5 @@
 import { firebaseUserRepository } from "../../../data/firebase/user/firebase-user-repository";
+import SalesItem from "../../models/farm/sales/SalesItem";
 import User from "../../models/farm/user/User";
 import { UserRepository } from "../../repositories/user-repository";
 import { GetUserUseCase } from "./GetUserUseCase";
@@ -9,7 +10,12 @@ export class GetUserUseCaseImpl implements GetUserUseCase {
   }
 
   async execute(uid: string): Promise<User | null> {
-    return this.userRepository.getUserByUid(uid);
+    const user = await this.userRepository.getUserByUid(uid);
+    user.sales = user.sales.sort((a: SalesItem, b: SalesItem) => {
+      return b.income - a.income;
+    });
+
+    return user;
   }
 }
 
