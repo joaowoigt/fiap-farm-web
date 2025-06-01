@@ -1,10 +1,11 @@
 import { doc, Firestore, getDoc, setDoc } from "@firebase/firestore";
 import { db } from "../clientApp";
-import Goal from "../../../domain/models/farm/goals/ProductionGoal";
+import Goal from "../../../domain/models/farm/goals/Goal";
 import Goals from "../../../domain/models/farm/goals/Goals";
 import { Type } from "../../../domain/models/farm/product/Type";
 import Production from "../../../domain/models/farm/production/Production";
 import SalesItem from "../../../domain/models/farm/sales/SalesItem";
+import { GoalType } from "@repo/ui/dropdown";
 
 export class FirebaseGoalsRepository {
   private db: Firestore;
@@ -16,7 +17,7 @@ export class FirebaseGoalsRepository {
   async addGoalToUser(
     userId: string,
     newGoal: Goal,
-    goalType: string
+    goalType: GoalType
   ): Promise<boolean> {
     try {
       const userDocRef = doc(this.db, "users", userId);
@@ -29,7 +30,7 @@ export class FirebaseGoalsRepository {
 
       const userData = userDocSnap.data();
 
-      if (goalType === "production") {
+      if (goalType === GoalType.production) {
         userData.goals.productionGoals = this.updateProductionGoal(
           userData.goals,
           newGoal,

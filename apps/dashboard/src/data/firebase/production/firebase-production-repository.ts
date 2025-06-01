@@ -3,7 +3,7 @@ import { ProductionRepository } from "../../../domain/repositories/production-re
 import { doc, Firestore, getDoc, setDoc } from "@firebase/firestore";
 import { db } from "../clientApp";
 import User from "../../../domain/models/farm/user/User";
-import Goal from "../../../domain/models/farm/goals/ProductionGoal";
+import Goal from "../../../domain/models/farm/goals/Goal";
 
 export class FirebaseProductionRepository implements ProductionRepository {
   private db: Firestore;

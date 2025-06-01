@@ -3,7 +3,7 @@ import ProductResponse from "../../../data/responses/farm/product/ProductRespons
 import ProductionResponse from "../../../data/responses/farm/production/ProductionResponse";
 import SalesItemResponse from "../../../data/responses/farm/sales/SalesItemResponse";
 import UserResponse from "../../../data/responses/farm/user/UserResponse";
-import ProductionGoal from "../../models/farm/goals/ProductionGoal";
+import ProductionGoal from "../../models/farm/goals/Goal";
 import SalesGoal from "../../models/farm/goals/SalesGoal";
 import Product from "../../models/farm/product/Product";
 import { getTypeFromDb } from "../../models/farm/product/Type";

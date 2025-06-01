@@ -1,5 +1,5 @@
 import { Text } from "@repo/ui/texts";
-import Goal from "../../../domain/models/farm/goals/ProductionGoal";
+import Goal from "../../../domain/models/farm/goals/Goal.ts";
 import { GoalsItemTable } from "./tableItem.tsx";
 
 interface GoalsTableProps {

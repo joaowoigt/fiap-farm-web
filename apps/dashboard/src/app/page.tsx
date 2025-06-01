@@ -19,7 +19,8 @@ import Loading from "./loading";
 import GoalsDashboard from "./goals";
 import Goals from "../domain/models/farm/goals/Goals";
 import { addGoalUseCaseImpl } from "../domain/useCases/farm/goals/AddGoalUseCaseImpl";
-import Goal from "../domain/models/farm/goals/ProductionGoal";
+import Goal from "../domain/models/farm/goals/Goal";
+import { GoalType } from "@repo/ui/dropdown";
 
 const getUserUseCase = getUserUseCaseImpl;
 const addProductionUseCase = addProductionUseCaseImpl;
@@ -83,7 +84,7 @@ export default function Page(): JSX.Element {
     return success;
   }
 
-  async function addGoal(newGoal: Goal, goalType: string): Promise<boolean> {
+  async function addGoal(newGoal: Goal, goalType: GoalType): Promise<boolean> {
     const userId = decrypt(sessionStorage.getItem("farmUser") ?? "");
     const success = await addGoalsUseCase.execute(userId, newGoal, goalType);
     if (success) {

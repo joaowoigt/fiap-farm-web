@@ -1,5 +1,5 @@
 import { Button } from "@repo/ui/buttons";
-import Goal from "../../../domain/models/farm/goals/ProductionGoal";
+import Goal from "../../../domain/models/farm/goals/Goal";
 import { Text } from "@repo/ui/texts";
 import { useState } from "react";
 import {
@@ -14,7 +14,7 @@ import CurrencyInput from "react-currency-input-field";
 import { getTypeFromUi } from "../../../domain/models/farm/product/Type";
 
 interface NewGoalsProps {
-  onAddGoal: (goal: Goal, goalType: string) => Promise<boolean>;
+  onAddGoal: (goal: Goal, goalType: GoalType) => Promise<boolean>;
 }
 
 export default function NewGoals({ onAddGoal }: NewGoalsProps) {

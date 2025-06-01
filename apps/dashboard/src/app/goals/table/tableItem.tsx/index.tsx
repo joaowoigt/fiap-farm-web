@@ -1,5 +1,5 @@
 import StatusTag from "@repo/ui/statusTag";
-import Goal from "../../../../domain/models/farm/goals/ProductionGoal";
+import Goal from "../../../../domain/models/farm/goals/Goal";
 import { Text } from "@repo/ui/texts";
 
 export interface GoalsItemTableProps {

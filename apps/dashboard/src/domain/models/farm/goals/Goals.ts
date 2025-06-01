@@ -1,4 +1,4 @@
-import Goal from "./ProductionGoal";
+import Goal from "./Goal";
 
 export default interface Goals {
   productionGoals: Goal[];
