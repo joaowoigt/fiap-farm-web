@@ -1,7 +1,6 @@
-import ProductionGoal from "./ProductionGoal";
-import SalesGoal from "./SalesGoal";
+import Goal from "./ProductionGoal";
 
 export default interface Goals {
-  productionGoals: ProductionGoal[];
-  salesGoals: SalesGoal[];
+  productionGoals: Goal[];
+  salesGoals: Goal[];
 }

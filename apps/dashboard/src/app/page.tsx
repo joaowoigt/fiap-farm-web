@@ -8,8 +8,6 @@ import ProductionDashboard from "./production";
 import Production, {
   getAllAvailableProducts,
 } from "../domain/models/farm/production/Production";
-import { Type } from "../domain/models/farm/product/Type";
-import { Status } from "../domain/models/farm/production/Status";
 import { addProductionUseCaseImpl } from "../domain/useCases/farm/production/AddProductionUseCaseImpls";
 import SalesDashboard from "./sales";
 import SalesItem, {
@@ -18,16 +16,34 @@ import SalesItem, {
 import { addSalesItemUseCaseImpl } from "../domain/useCases/farm/sales/AddSalesItemUseCaseImpl";
 import Product from "../domain/models/farm/product/Product";
 import Loading from "./loading";
+import GoalsDashboard from "./goals";
+import Goals from "../domain/models/farm/goals/Goals";
+import { Type } from "../domain/models/farm/product/Type";
 
 const getUserUseCase = getUserUseCaseImpl;
 const addProductionUseCase = addProductionUseCaseImpl;
 const addSalesItemUseCase = addSalesItemUseCaseImpl;
+
+const emptyGoals: Goals = { productionGoals: [], salesGoals: [] };
+
+// Mock
+const mockedGoals: Goals = {
+  productionGoals: [
+    { type: Type.crops, goal: 100, current: 50 },
+    { type: Type.livestock, goal: 200, current: 150 },
+  ],
+  salesGoals: [
+    { type: Type.crops, goal: 5000, current: 3000 },
+    { type: Type.livestock, goal: 10000, current: 7000 },
+  ],
+};
 
 export default function Page(): JSX.Element {
   const [name, setName] = useState("");
   const [showTab, setShowTab] = useState(Tabs.production);
   const [productionList, setProductionList] = useState<Production[]>([]);
   const [salesList, setSalesList] = useState<SalesItem[]>([]);
+  const [goals, setGoals] = useState<Goals>(emptyGoals);
   const [loading, setLoading] = useState(true);
 
   const onProductionClick = () => {
@@ -52,6 +68,7 @@ export default function Page(): JSX.Element {
     setName(user?.production[0].product.name ?? "");
     setProductionList(user?.production ?? []);
     setSalesList(user?.sales ?? []);
+    setGoals(user?.goals ?? emptyGoals);
     setLoading(false);
   }
 
@@ -110,9 +127,7 @@ export default function Page(): JSX.Element {
                 }
               />
             )}
-            {showTab === Tabs.goals && (
-              <div className="text-4xl font-bold mb-4">Goals Dashboard</div>
-            )}
+            {showTab === Tabs.goals && <GoalsDashboard goals={mockedGoals} />}
           </div>
         )}
       </div>

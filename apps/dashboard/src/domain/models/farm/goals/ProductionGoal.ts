@@ -1,6 +1,7 @@
 import { Type } from "../product/Type";
 
-export default interface ProductionGoal {
+export default interface Goal {
   type: Type;
-  quantity: number;
+  goal: number;
+  current: number;
 }
