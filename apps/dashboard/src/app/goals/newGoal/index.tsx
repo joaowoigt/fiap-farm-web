@@ -101,7 +101,7 @@ export default function NewGoals({ onAddGoal }: NewGoalsProps) {
         <Button
           intent="secondary"
           onClick={handleAddGoal}
-          text="Add Sale"
+          text="Add New Goal"
         ></Button>
       </div>
     </div>

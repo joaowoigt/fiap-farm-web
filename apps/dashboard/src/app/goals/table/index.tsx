@@ -41,7 +41,7 @@ export default function GoalsTable({
         ) : (
           productionGoals.map((goal, index) => (
             <div key={index}>
-              <GoalsItemTable goal={goal} />
+              <GoalsItemTable goal={goal} type="production" />
             </div>
           ))
         )}
@@ -65,7 +65,7 @@ export default function GoalsTable({
         ) : (
           salesGoals.map((goal, index) => (
             <div key={index}>
-              <GoalsItemTable goal={goal} />
+              <GoalsItemTable goal={goal} type="sales" />
             </div>
           ))
         )}
