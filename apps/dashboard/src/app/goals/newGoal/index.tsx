@@ -27,7 +27,8 @@ export default function NewGoals({ onAddGoal }: NewGoalsProps) {
   async function handleAddGoal() {
     const newGoal: Goal = {
       type: getTypeFromUi(type),
-      goal: goalType === GoalType.production ? quantity : goalValue,
+      goal:
+        goalType === GoalType.production ? Number(quantity) : Number(goalValue),
       current: 0,
     };
     const result = await onAddGoal(newGoal, goalType);

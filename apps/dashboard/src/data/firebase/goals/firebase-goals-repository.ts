@@ -88,10 +88,12 @@ export class FirebaseGoalsRepository {
       return 0;
     }
 
-    return currentProduction.reduce(
-      (total: number, prod: Production) => total + prod.quantity,
-      0
-    );
+    return currentProduction.reduce((total: number, prod: Production) => {
+      if (prod.status === "done") {
+        return total + prod.quantity;
+      }
+      return total;
+    }, 0);
   };
 
   updateSalesGoal = (goals: Goals, newGoal: Goal, sales: SalesItem[]) => {
@@ -128,7 +130,7 @@ export class FirebaseGoalsRepository {
     }
 
     return currentSales.reduce(
-      (total: number, sale: SalesItem) => total + sale.quantity,
+      (total: number, sale: SalesItem) => total + sale.income,
       0
     );
   };

@@ -41,6 +41,14 @@ export class FirebaseSalesRepository implements SalesRepository {
         updatedList = [...userData.sales, salesItem];
       }
       userData.sales = updatedList;
+
+      const goalsIndex = userData.goals?.salesGoals.findIndex(
+        (goal: { type: string }) => goal.type === salesItem.product.type
+      );
+      if (goalsIndex !== -1) {
+        userData.goals.salesGoals[goalsIndex].current += salesItem.income;
+      }
+
       await setDoc(userDocRef, userData, { merge: true });
       return true;
     } catch (error) {

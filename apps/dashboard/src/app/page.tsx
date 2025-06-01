@@ -55,7 +55,6 @@ export default function Page(): JSX.Element {
     setLoading(true);
     const userId = decrypt(sessionStorage.getItem("farmUser") ?? "");
     const user = await getUserUseCase.execute(userId);
-    setName(user?.production[0].product.name ?? "");
     setProductionList(user?.production ?? []);
     setSalesList(user?.sales ?? []);
     setGoals(user?.goals ?? emptyGoals);
@@ -66,7 +65,7 @@ export default function Page(): JSX.Element {
     const userId = decrypt(sessionStorage.getItem("farmUser") ?? "");
     const success = await addProductionUseCase.execute(userId, newProduction);
     if (success) {
-      setProductionList((prev) => [...prev, newProduction]);
+      fetchAccount();
     }
     return success;
   }
