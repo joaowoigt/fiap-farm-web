@@ -9,13 +9,14 @@ export default function SalesTable({ sales }: SalesTableProps) {
   return (
     <div className="border-2 w-[70%] h-fit border-background rounded-lg">
       <div className="grid grid-cols-3 bg-background p-3 rounded-md border-2">
-        <Text intent="Regular" color="default" style="bold" text="Name"></Text>
-        <Text intent="Regular" color="default" style="bold" text="Type"></Text>
+        {" "}
+        <Text intent="Regular" color="default" style="bold" text="Nome"></Text>
+        <Text intent="Regular" color="default" style="bold" text="Tipo"></Text>
         <Text
           intent="Regular"
           color="default"
           style="bold"
-          text="Income"
+          text="Receita"
         ></Text>
       </div>
       {sales.length === 0 && (
@@ -23,7 +24,7 @@ export default function SalesTable({ sales }: SalesTableProps) {
           <Text
             intent="Small"
             color="default"
-            text="No Sales found. Add your first item to keep track of your farm's sales."
+            text="Nenhuma venda encontrada. Adicione seu primeiro item para acompanhar as vendas da sua fazenda."
           />
         </div>
       )}

@@ -21,7 +21,7 @@ export default function SalesDashboard({
         intent="Heading"
         color="default"
         style="bold"
-        text="Sales Dashboard"
+        text="Dashboard de Vendas"
       ></Text>
       <div className="flex flex-row">
         <SalesTable sales={sales} />

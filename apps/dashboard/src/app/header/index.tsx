@@ -13,7 +13,9 @@ export default function Header({
 }: HeaderProps) {
   return (
     <header className="bg-primary text-white p-4 w-full">
-      <h1 className="text-2xl font-bold">Farm Management System: {name}</h1>
+      <h1 className="text-2xl font-bold">
+        Sistema de Gestão da Fazenda: {name}
+      </h1>
       <nav className="mt-2">
         <ul className="flex space-x-4">
           <li>
@@ -21,7 +23,7 @@ export default function Header({
               onClick={onProductionClick}
               className="text-white hover:underline hover:cursor-pointer"
             >
-              Production
+              Produção
             </a>
           </li>
           <li>
@@ -29,7 +31,7 @@ export default function Header({
               onClick={onSalesClick}
               className="text-white hover:underline hover:cursor-pointer"
             >
-              Sales
+              Vendas
             </a>
           </li>
           <li>
@@ -37,7 +39,7 @@ export default function Header({
               onClick={onGoalsClick}
               className="text-white hover:underline hover:cursor-pointer"
             >
-              Goals
+              Metas
             </a>
           </li>
         </ul>

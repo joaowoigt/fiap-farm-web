@@ -10,12 +10,13 @@ export default function ProductionTable({ production }: ProductionTableProps) {
   return (
     <div className="border-2 w-[70%] h-fit border-background rounded-lg">
       <div className="grid grid-cols-3  bg-background p-3 rounded-md border-2">
-        <Text intent="Regular" color="default" style="bold" text="Name"></Text>
+        {" "}
+        <Text intent="Regular" color="default" style="bold" text="Nome"></Text>
         <Text
           intent="Regular"
           color="default"
           style="bold"
-          text="Quantity"
+          text="Quantidade"
         ></Text>
         <Text
           intent="Regular"
@@ -29,7 +30,7 @@ export default function ProductionTable({ production }: ProductionTableProps) {
           <Text
             intent="Small"
             color="default"
-            text="No production found. Add your first item to keep track of your farm's production."
+            text="Nenhuma produção encontrada. Adicione seu primeiro item para acompanhar a produção da sua fazenda."
           />
         </div>
       )}

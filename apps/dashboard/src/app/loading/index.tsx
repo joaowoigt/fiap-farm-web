@@ -7,7 +7,7 @@ export default function Loading(): JSX.Element {
         intent="Heading"
         color="default"
         style="bold"
-        text="Loading your farm..."
+        text="Carregando sua fazenda..."
       ></Text>
       <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
     </div>

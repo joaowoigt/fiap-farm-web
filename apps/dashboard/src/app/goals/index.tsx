@@ -20,7 +20,7 @@ export default function GoalsDashboard({
         intent="Heading"
         color="default"
         style="bold"
-        text="Goals Dashboard"
+        text="Dashboard de Metas"
       ></Text>
       <div className="flex flex-row">
         <GoalsTable

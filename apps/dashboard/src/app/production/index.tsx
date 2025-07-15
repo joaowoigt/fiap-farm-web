@@ -18,7 +18,7 @@ export default function ProductionDashboard({
         intent="Heading"
         color="default"
         style="bold"
-        text="Production Dashboard"
+        text="Dashboard de Produção"
       ></Text>
       <div className="flex flex-row">
         <ProductionTable production={production} />

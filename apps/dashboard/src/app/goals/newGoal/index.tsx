@@ -41,16 +41,16 @@ export default function NewGoals({ onAddGoal }: NewGoalsProps) {
         intent="Heading"
         color="default"
         style="bold"
-        text="New Goal"
+        text="Nova Meta"
       ></Text>
       <Text
         intent="Small"
         color="default"
-        text="Add a new production goal for the farm."
-      ></Text>
+        text="Adicione uma nova meta de produção para a fazenda."
+      ></Text>{" "}
       <div className="mt-4">
         <Dropdown
-          placeholder="Select the product type"
+          placeholder="Selecione o tipo do produto"
           onSelect={(item: DropDownItem) =>
             setType(item.type as ProductionType)
           }
@@ -59,7 +59,7 @@ export default function NewGoals({ onAddGoal }: NewGoalsProps) {
       </div>
       <div className="mt-4">
         <Dropdown
-          placeholder="Select the product type"
+          placeholder="Selecione o tipo de meta"
           onSelect={(item: DropDownItem) => setGoalType(item.type as GoalType)}
           menuItems={menuGoalTypeDropDownItems}
         />
@@ -70,18 +70,17 @@ export default function NewGoals({ onAddGoal }: NewGoalsProps) {
             className="outline outline-1 outline-primary mb-6 bg-white rounded-md px-3 w-full  py-3 text-black text-start flex flex-row hover:cursor-text"
             type="number"
             name="quantity"
-            placeholder="Enter the quantity goal"
+            placeholder="Digite a meta de quantidade"
             onChange={(event: any) => setQuantity(event.target.value)}
             color="default"
             value={quantity !== 0 ? quantity : ""}
           ></input>
         </div>
-      )}
-
+      )}{" "}
       {goalType === GoalType.sales && (
         <div className="mt-4">
           <CurrencyInput
-            placeholder="Enter the goal value"
+            placeholder="Digite o valor da meta"
             decimalsLimit={2}
             onValueChange={(value, name, values) =>
               setGoalValue(values?.float as number)
@@ -96,12 +95,12 @@ export default function NewGoals({ onAddGoal }: NewGoalsProps) {
         <Text
           intent="Small"
           color="default"
-          text={success ? "Sale added successfully!" : ""}
+          text={success ? "Meta adicionada com sucesso!" : ""}
         ></Text>
         <Button
           intent="secondary"
           onClick={handleAddGoal}
-          text="Add New Goal"
+          text="Adicionar Nova Meta"
         ></Button>
       </div>
     </div>

@@ -37,16 +37,16 @@ export default function NewSales({ products, onAddSale }: NewSalesProps) {
         intent="Heading"
         color="default"
         style="bold"
-        text="New Sales"
+        text="Nova Venda"
       ></Text>
       <Text
         intent="Small"
         color="default"
-        text="Add a new sale to the farm."
+        text="Adicione uma nova venda à fazenda."
       ></Text>
       <div className="mt-4">
         <Dropdown
-          placeholder="Select a product"
+          placeholder="Selecione um produto"
           menuItems={products.map((product) => ({
             title: product.name,
             type: product.type,
@@ -64,7 +64,7 @@ export default function NewSales({ products, onAddSale }: NewSalesProps) {
           className="outline outline-1 outline-primary mb-6 bg-white rounded-md px-3 w-full  py-3 text-black text-start flex flex-row hover:cursor-text"
           type="number"
           name="quantity"
-          placeholder="Enter the quantity sold"
+          placeholder="Digite a quantidade vendida"
           onChange={(event: any) => setQuantity(event.target.value)}
           color="default"
           value={quantity !== 0 ? quantity : ""}
@@ -74,12 +74,12 @@ export default function NewSales({ products, onAddSale }: NewSalesProps) {
         <Text
           intent="Small"
           color="default"
-          text={success ? "Sale added successfully!" : ""}
+          text={success ? "Venda adicionada com sucesso!" : ""}
         ></Text>
         <Button
           intent="secondary"
           onClick={handleAddSale}
-          text="Add Sale"
+          text="Adicionar Venda"
         ></Button>
       </div>
     </div>

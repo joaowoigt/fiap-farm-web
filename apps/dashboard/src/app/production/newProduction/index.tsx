@@ -58,23 +58,24 @@ export default function NewProduction({ onAddProduction }: NewProductionProps) {
   };
   return (
     <div className="flex flex-col border-2 h-fit border-background rounded-lg mx-3 p-3">
+      {" "}
       <Text
         intent="Heading"
         color="default"
         style="bold"
-        text="New Production"
+        text="Nova Produção"
       ></Text>
       <Text
         intent="Small"
         color="default"
-        text="Add a new production to the farm."
+        text="Adicione uma nova produção à fazenda."
       ></Text>
       <input
         className="outline outline-1 outline-primary  mb-6 mt-4 bg-white rounded-md px-3 w-full  py-3 text-black text-start flex flex-row hover:cursor-text"
         type="text"
         name="productName"
         onChange={(event: any) => setProductName(event.target.value)}
-        placeholder="Enter the product name"
+        placeholder="Digite o nome do produto"
         color="default"
         value={productName}
       ></input>
@@ -82,13 +83,13 @@ export default function NewProduction({ onAddProduction }: NewProductionProps) {
         className="outline outline-1 outline-primary mb-6 bg-white rounded-md px-3 w-full  py-3 text-black text-start flex flex-row hover:cursor-text"
         type="number"
         name="quantity"
-        placeholder="Enter the product quantity"
+        placeholder="Digite a quantidade do produto"
         onChange={(event: any) => setQuantity(event.target.value)}
         color="default"
         value={quantity !== 0 ? quantity : ""}
       ></input>
       <CurrencyInput
-        placeholder="Enter the product unit value"
+        placeholder="Digite o valor unitário do produto"
         decimalsLimit={2}
         onValueChange={(value, name, values) =>
           setUnitValue(values?.float as number)
@@ -99,31 +100,30 @@ export default function NewProduction({ onAddProduction }: NewProductionProps) {
       />
       <div className="mb-6">
         <Dropdown
-          placeholder="Select the product status"
+          placeholder="Selecione o status do produto"
           onSelect={(item: DropDownItem) => setStatus(item.type as StatusType)}
           menuItems={menuStatusDropDownItems}
         />
       </div>
       <div className="mb-6">
         <Dropdown
-          placeholder="Select the product type"
+          placeholder="Selecione o tipo do produto"
           onSelect={(item: DropDownItem) =>
             setType(item.type as ProductionType)
           }
           menuItems={menuTypeDropDownItems}
         />
       </div>
-
       <div className="mt-3 flex justify-end">
         <Text
           intent="Small"
           color="default"
-          text={success ? "Production added successfully!" : ""}
+          text={success ? "Produção adicionada com sucesso!" : ""}
         ></Text>
         <Button
           intent="secondary"
           onClick={handleAddProduction}
-          text="Add Production"
+          text="Adicionar Produção"
         ></Button>
       </div>
     </div>

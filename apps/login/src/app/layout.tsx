@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
   title: "Fiap-farm",
-  description: "the best digital farm manager system",
+  description: "o melhor sistema de gestão de fazenda digital",
 };
 
 export default function RootLayout({
