@@ -8,12 +8,14 @@ interface SalesDashboardProps {
   sales: SalesItem[];
   products: Product[];
   onAddSale: (product: Product, quantity: number) => Promise<boolean>;
+  loading: boolean;
 }
 
 export default function SalesDashboard({
   sales,
   products,
   onAddSale,
+  loading,
 }: SalesDashboardProps) {
   return (
     <div className="flex flex-col">
@@ -24,7 +26,7 @@ export default function SalesDashboard({
         text="Dashboard de Vendas"
       ></Text>
       <div className="flex flex-row">
-        <SalesTable sales={sales} />
+        <SalesTable sales={sales} loading={loading} />
         <NewSales products={products} onAddSale={onAddSale} />
       </div>
     </div>

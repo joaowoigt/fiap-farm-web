@@ -24,10 +24,6 @@ export default function Page(): JSX.Element {
     onGoalsClick,
   } = useDashboard();
 
-  if (loading) {
-    return Loading();
-  }
-
   if (error) {
     return (
       <div className="bg-background h-full flex flex-col mobile:w-full">
@@ -51,6 +47,7 @@ export default function Page(): JSX.Element {
         <div className="flex flex-col w-full p-4">
           {showTab === Tabs.production && (
             <ProductionDashboard
+              loading={loading}
               production={productionList}
               onAddProduction={addProduction}
             />
@@ -60,10 +57,15 @@ export default function Page(): JSX.Element {
               sales={salesList}
               products={availableProducts}
               onAddSale={addSalesItem}
+              loading={loading}
             />
           )}
           {showTab === Tabs.goals && (
-            <GoalsDashboard goals={goals} onAddGoal={addGoal} />
+            <GoalsDashboard
+              goals={goals}
+              onAddGoal={addGoal}
+              loading={loading}
+            />
           )}
         </div>
       </div>

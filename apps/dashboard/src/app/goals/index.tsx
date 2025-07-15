@@ -8,11 +8,13 @@ import { GoalType } from "@repo/ui/dropdown";
 interface GoalsDashboardProps {
   goals: Goals;
   onAddGoal: (newGoal: Goal, goalType: GoalType) => Promise<boolean>;
+  loading: boolean;
 }
 
 export default function GoalsDashboard({
   goals,
   onAddGoal,
+  loading,
 }: GoalsDashboardProps) {
   return (
     <div className="flex flex-col">
@@ -26,6 +28,7 @@ export default function GoalsDashboard({
         <GoalsTable
           salesGoals={goals.salesGoals}
           productionGoals={goals.productionGoals}
+          loading={loading}
         />
         <NewGoals onAddGoal={onAddGoal}></NewGoals>
       </div>

@@ -1,15 +1,18 @@
 import { Text } from "@repo/ui/texts";
 import Goal from "../../../domain/models/farm/goals/Goal.ts";
 import { GoalsItemTable } from "./tableItem.tsx";
+import Loading from "../../loading/index.tsx";
 
 interface GoalsTableProps {
   productionGoals: Goal[];
   salesGoals: Goal[];
+  loading: boolean;
 }
 
 export default function GoalsTable({
   salesGoals,
   productionGoals,
+  loading,
 }: GoalsTableProps) {
   return (
     <div className="border-2 w-[70%] h-fit border-background rounded-lg">
@@ -26,6 +29,7 @@ export default function GoalsTable({
           style="bold"
           text="Metas de Produção"
         ></Text>{" "}
+        {loading && <Loading />}
         {productionGoals.length === 0 ? (
           <div className="p-3">
             <Text
