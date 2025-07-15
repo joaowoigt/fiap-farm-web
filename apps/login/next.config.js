@@ -7,7 +7,8 @@ module.exports = {
   output: "standalone",
   reactStrictMode: true,
   transpilePackages: ["@repo/ui"],
-  assetPrefix: "/login",  async rewrites() {
+  assetPrefix: "/login",
+  async rewrites() {
     return [
       {
         source: "/dashboard",
