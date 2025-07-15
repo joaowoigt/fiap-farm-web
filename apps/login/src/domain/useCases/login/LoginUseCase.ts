@@ -1,12 +1,6 @@
-import { UiError } from "../../models/uiError";
 import { User } from "../../models/user";
+import { Result } from "../../common/Result";
 
 export interface LoginUseCase {
-  execute: (email: string, password: string) => Promise<LoginResult>;
+  execute: (email: string, password: string) => Promise<Result<User>>;
 }
-
-export interface LoginSuccess {
-  user: User;
-}
-
-export type LoginResult = LoginSuccess | UiError;

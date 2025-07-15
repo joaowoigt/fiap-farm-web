@@ -1,5 +1,3 @@
-import { ProductionType } from "@repo/ui/dropdown";
-
 export enum Type {
   crops = "crops",
   livestock = "livestock",
@@ -19,13 +17,13 @@ export const getTypeFromDb = (type: string): Type => {
   }
 };
 
-export const getTypeFromUi = (type: ProductionType): Type => {
+export const getTypeFromUi = (type: string): Type => {
   switch (type) {
-    case ProductionType.crops:
+    case "crops":
       return Type.crops;
-    case ProductionType.livestock:
+    case "livestock":
       return Type.livestock;
-    case ProductionType.dairy:
+    case "dairy":
       return Type.dairy;
     default:
       throw new Error("Invalid type");

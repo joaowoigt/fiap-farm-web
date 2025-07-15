@@ -16,7 +16,7 @@ type DropDownType = StatusType | ProductionType | string;
 
 export enum StatusType {
   waiting = "waiting",
-  inProgress = "inProgress",
+  inProgress = "in Progress",
   done = "done",
 }
 

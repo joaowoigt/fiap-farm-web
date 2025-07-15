@@ -1,26 +1,45 @@
 import { AuthRepository } from "../../repositories/auth-repository";
 import { RegisterUseCase } from "./RegisterUseCase";
 import { firebaseAuthRepository } from "../../../data/firebase/Auth/firebase-auth-repository";
+import {
+  Result,
+  Success,
+  Failure,
+  ValidationError,
+  DomainError,
+} from "../../common/Result";
+import { User } from "../../models/user";
+import { AuthenticationService } from "../../services/AuthenticationService";
 
 export class RegisterUseCaseImpl implements RegisterUseCase {
+  private authService: AuthenticationService;
+
   constructor(private authRepository: AuthRepository) {
     this.authRepository = authRepository;
+    this.authService = new AuthenticationService();
   }
 
-  async execute(email: string, password: string): Promise<boolean> {
-    if (!email || !password) {
-      throw new Error("Email e senha são obrigatórios");
+  async execute(
+    email: string,
+    password: string
+  ): Promise<Result<User, DomainError>> {
+    // Validação usando AuthenticationService
+    const validationResult = this.authService.validateRegistrationData(
+      email,
+      password
+    );
+    if (validationResult.isFailure) {
+      return validationResult as Result<User, DomainError>;
     }
-    try {
-      const user = await this.authRepository.registerUserWithEmailAndPassword(
+
+    // Registrar usuário no Firebase
+    const userResult =
+      await this.authRepository.registerUserWithEmailAndPassword(
         email,
         password
       );
-      return user;
-    } catch (error: any) {
-      console.error("Erro ao registrar usuário", error);
-      throw new Error(`Erro ao registrar usuário: ${error.message}`);
-    }
+
+    return userResult;
   }
 }
 

@@ -2,6 +2,14 @@ import SalesItem from "../../../domain/models/farm/sales/SalesItem";
 import { SalesRepository } from "../../../domain/repositories/sales-repository";
 import { doc, Firestore, getDoc, setDoc } from "@firebase/firestore";
 import { db } from "../clientApp";
+import {
+  Result,
+  Success,
+  Failure,
+  DatabaseError,
+  NotFoundError,
+  ValidationError,
+} from "../../../domain/common/Result";
 
 export class FirebaseSalesRepository implements SalesRepository {
   private db: Firestore;
@@ -9,15 +17,23 @@ export class FirebaseSalesRepository implements SalesRepository {
   constructor(db: Firestore) {
     this.db = db;
   }
-
-  async addSalesToUser(userId: string, salesItem: SalesItem): Promise<boolean> {
+  async addSalesToUser(
+    userId: string,
+    salesItem: SalesItem
+  ): Promise<Result<boolean>> {
     try {
+      if (!userId || !salesItem) {
+        return Failure.create(
+          new ValidationError("ID do usuário e item de venda são obrigatórios")
+        );
+      }
+
       const userDocRef = doc(this.db, "users", userId);
       const userDocSnap = await getDoc(userDocRef);
 
       if (!userDocSnap.exists()) {
         console.error("User document does not exist");
-        return false;
+        return Failure.create(new NotFoundError("Usuário não encontrado"));
       }
 
       const userData = userDocSnap.data();
@@ -50,10 +66,10 @@ export class FirebaseSalesRepository implements SalesRepository {
       }
 
       await setDoc(userDocRef, userData, { merge: true });
-      return true;
+      return Success.create(true);
     } catch (error) {
       console.error("Error adding sales item to user:", error);
-      return false;
+      return Failure.create(new DatabaseError("Falha ao adicionar venda"));
     }
   }
 }

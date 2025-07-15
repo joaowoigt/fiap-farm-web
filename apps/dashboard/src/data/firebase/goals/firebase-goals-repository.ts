@@ -5,27 +5,41 @@ import Goals from "../../../domain/models/farm/goals/Goals";
 import { Type } from "../../../domain/models/farm/product/Type";
 import Production from "../../../domain/models/farm/production/Production";
 import SalesItem from "../../../domain/models/farm/sales/SalesItem";
-import { GoalType } from "@repo/ui/dropdown";
+import { GoalType } from "../../../domain/models/farm/goals/GoalType";
+import { GoalsRepository } from "../../../domain/repositories/goals-repository";
+import {
+  Result,
+  Success,
+  Failure,
+  DatabaseError,
+  NotFoundError,
+  ValidationError,
+} from "../../../domain/common/Result";
 
-export class FirebaseGoalsRepository {
+export class FirebaseGoalsRepository implements GoalsRepository {
   private db: Firestore;
 
   constructor(db: Firestore) {
     this.db = db;
   }
-
   async addGoalToUser(
     userId: string,
     newGoal: Goal,
     goalType: GoalType
-  ): Promise<boolean> {
+  ): Promise<Result<boolean>> {
     try {
+      if (!userId || !newGoal || !goalType) {
+        return Failure.create(
+          new ValidationError("ID do usuário, meta e tipo são obrigatórios")
+        );
+      }
+
       const userDocRef = doc(this.db, "users", userId);
       const userDocSnap = await getDoc(userDocRef);
 
       if (!userDocSnap.exists()) {
         console.error("User document does not exist");
-        return false;
+        return Failure.create(new NotFoundError("Usuário não encontrado"));
       }
 
       const userData = userDocSnap.data();
@@ -45,10 +59,10 @@ export class FirebaseGoalsRepository {
       }
 
       await setDoc(userDocRef, userData, { merge: true });
-      return true;
+      return Success.create(true);
     } catch (error) {
       console.error("Error adding goal to user:", error);
-      return false;
+      return Failure.create(new DatabaseError("Falha ao adicionar meta"));
     }
   }
 

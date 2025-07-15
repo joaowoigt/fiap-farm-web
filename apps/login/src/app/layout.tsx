@@ -1,3 +1,4 @@
+import React from "react";
 import "./globals.css";
 import "@repo/ui/styles.css";
 import type { Metadata } from "next";
@@ -14,7 +15,7 @@ export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-}): JSX.Element {
+}) {
   return (
     <html lang="pt-br" className={inter.variable}>
       <body className="font-sans">{children}</body>
