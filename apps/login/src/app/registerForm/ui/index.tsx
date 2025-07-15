@@ -1,6 +1,7 @@
 import { Text } from "@repo/ui/texts";
 import { Button } from "@repo/ui/buttons";
 import { UiError } from "../../../domain/models/uiError";
+import { useEffect } from "react";
 
 export interface RegisterFormScreenProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -31,6 +32,11 @@ export default function RegisterFormScreen({
   email,
   password,
 }: RegisterFormScreenProps) {
+  // Debug: log do estado de success
+  useEffect(() => {
+    console.log("Estado de success na UI mudou:", success);
+  }, [success]);
+
   return (
     <div>
       <div className="flex flex-col items-center  w-[450px] justify-center border-2 border-black p-4 rounded-lg bg-white bg-opacity-10">
@@ -54,7 +60,8 @@ export default function RegisterFormScreen({
             color="default"
             style="bold"
             text="Nome"
-          ></Text>          <input
+          ></Text>{" "}
+          <input
             className="outline outline-1 outline-primary  mb-2 mt-4 bg-white rounded-md px-3 w-[250px]  py-3 text-black text-start flex flex-row hover:cursor-text"
             type="text"
             name="username"
@@ -77,7 +84,8 @@ export default function RegisterFormScreen({
             color="default"
             style="bold"
             text="Email"
-          ></Text>          <input
+          ></Text>{" "}
+          <input
             className="outline outline-1 outline-primary  mb-2 mt-4 bg-white rounded-md px-3 w-[250px]  py-3 text-black text-start flex flex-row hover:cursor-text"
             type="email"
             name="emailname"
@@ -100,7 +108,8 @@ export default function RegisterFormScreen({
             color="default"
             style="bold"
             text="Senha"
-          ></Text>          <input
+          ></Text>{" "}
+          <input
             className="outline outline-1 outline-primary  mb-2 mt-4 bg-white rounded-md px-3 w-[250px]  py-3 text-black text-start flex flex-row hover:cursor-text"
             type="password"
             name="password"
@@ -116,7 +125,8 @@ export default function RegisterFormScreen({
               style="bold"
               text={passwordError.message}
             ></Text>
-          )}          <div className="mb-4"></div>
+          )}{" "}
+          <div className="mb-4"></div>
           {success && (
             <div className="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded-md">
               <Text
@@ -131,7 +141,7 @@ export default function RegisterFormScreen({
             <Button
               intent="primary"
               text="Registrar"
-              {...{ type: "submit" } as any}
+              {...({ type: "submit" } as any)}
             ></Button>
           </div>
         </form>

@@ -9,7 +9,8 @@ import {
 } from "../observers/Validator";
 
 // Componente simplificado - responsável apenas pela apresentação
-export default function RegisterFormController() {  const {
+export default function RegisterFormController() {
+  const {
     email,
     password,
     userName,

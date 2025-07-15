@@ -27,11 +27,12 @@ export function useRegister() {
     show: false,
     message: "",
   });
-
   // useEffect para esconder a mensagem de sucesso após 5 segundos
   useEffect(() => {
     if (success) {
+      console.log("Mensagem de sucesso ativada, será ocultada em 5 segundos");
       const timer = setTimeout(() => {
+        console.log("Ocultando mensagem de sucesso");
         setSuccess(false);
       }, 5000);
 
@@ -80,15 +81,16 @@ export function useRegister() {
 
     try {
       const result = await controller.register(email, password);
-
       return result.match(
         (user: User) => {
           console.log("Registro bem-sucedido", user);
+          console.log("Definindo success como true");
           setSuccess(true);
           resetForm();
           return true;
         },
         (error) => {
+          console.log("Erro no registro:", error.message);
           setError(error.message);
           return false;
         }
@@ -107,7 +109,7 @@ export function useRegister() {
     setConfirmPassword("");
     setUserName("");
     setError(null);
-    setSuccess(false);
+    // Não resetar o success aqui para permitir que a mensagem seja exibida
     setUserNameError({ show: false, message: "" });
     setEmailError({ show: false, message: "" });
     setPasswordError({ show: false, message: "" });
