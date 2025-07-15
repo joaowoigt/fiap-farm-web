@@ -1,7 +1,7 @@
 import { cva, VariantProps } from "class-variance-authority";
 
 const iconStyles = cva(
-  "ui-bg-primary ui-mr-2 ui-w-fit ui-rounded-full ui-p-sm ui-items-center ui-justify-center hover: ui-cursor-pointer"
+  "ui-bg-primary ui-mr-2 ui-w-fit ui-rounded-full ui-p-sm ui-items-center ui-justify-center hover: ui-cursor-pointer",
 );
 interface IconProps extends VariantProps<typeof iconStyles> {
   onClick: (event: any) => void;

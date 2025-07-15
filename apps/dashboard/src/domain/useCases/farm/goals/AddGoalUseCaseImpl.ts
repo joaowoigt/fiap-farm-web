@@ -11,11 +11,11 @@ export class AddGoalUseCaseImpl implements AddGoalUseCase {
   async execute(
     userId: string,
     newGoal: Goal,
-    type: GoalType
+    type: GoalType,
   ): Promise<Result<boolean>> {
     if (!userId || !newGoal) {
       return Failure.create(
-        new ValidationError("User ID e meta são obrigatórios")
+        new ValidationError("User ID e meta são obrigatórios"),
       );
     }
 
@@ -24,5 +24,5 @@ export class AddGoalUseCaseImpl implements AddGoalUseCase {
 }
 
 export const addGoalUseCaseImpl = new AddGoalUseCaseImpl(
-  firebaseGoalsRepository
+  firebaseGoalsRepository,
 );

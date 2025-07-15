@@ -47,14 +47,14 @@ describe("AuthController", () => {
       const successResult = Success.create(user);
 
       mockAuthRepository.loginWithEmailAndPassword.mockResolvedValue(
-        successResult
+        successResult,
       );
 
       const result = await authController.login(email, password);
 
       expect(mockAuthRepository.loginWithEmailAndPassword).toHaveBeenCalledWith(
         email,
-        password
+        password,
       );
       expect(result.isSuccess()).toBe(true);
       expect(result.getValue()).toEqual(user);
@@ -67,14 +67,14 @@ describe("AuthController", () => {
       const failureResult = Failure.create<User>(error);
 
       mockAuthRepository.loginWithEmailAndPassword.mockResolvedValue(
-        failureResult
+        failureResult,
       );
 
       const result = await authController.login(email, password);
 
       expect(mockAuthRepository.loginWithEmailAndPassword).toHaveBeenCalledWith(
         email,
-        password
+        password,
       );
       expect(result.isFailure()).toBe(true);
       expect(result.getError()).toEqual(error);
@@ -85,15 +85,15 @@ describe("AuthController", () => {
       const password = "password123";
 
       mockAuthRepository.loginWithEmailAndPassword.mockRejectedValue(
-        new Error("Database error")
+        new Error("Database error"),
       );
 
       await expect(authController.login(email, password)).rejects.toThrow(
-        "Database error"
+        "Database error",
       );
       expect(mockAuthRepository.loginWithEmailAndPassword).toHaveBeenCalledWith(
         email,
-        password
+        password,
       );
     });
   });
@@ -106,13 +106,13 @@ describe("AuthController", () => {
       const successResult = Success.create(user);
 
       mockAuthRepository.registerUserWithEmailAndPassword.mockResolvedValue(
-        successResult
+        successResult,
       );
 
       const result = await authController.register(email, password);
 
       expect(
-        mockAuthRepository.registerUserWithEmailAndPassword
+        mockAuthRepository.registerUserWithEmailAndPassword,
       ).toHaveBeenCalledWith(email, password);
       expect(result.isSuccess()).toBe(true);
       expect(result.getValue()).toEqual(user);
@@ -125,13 +125,13 @@ describe("AuthController", () => {
       const failureResult = Failure.create<User>(error);
 
       mockAuthRepository.registerUserWithEmailAndPassword.mockResolvedValue(
-        failureResult
+        failureResult,
       );
 
       const result = await authController.register(email, password);
 
       expect(
-        mockAuthRepository.registerUserWithEmailAndPassword
+        mockAuthRepository.registerUserWithEmailAndPassword,
       ).toHaveBeenCalledWith(email, password);
       expect(result.isFailure()).toBe(true);
       expect(result.getError()).toEqual(error);
@@ -142,14 +142,14 @@ describe("AuthController", () => {
       const password = "password123";
 
       mockAuthRepository.registerUserWithEmailAndPassword.mockRejectedValue(
-        new Error("Network error")
+        new Error("Network error"),
       );
 
       await expect(authController.register(email, password)).rejects.toThrow(
-        "Network error"
+        "Network error",
       );
       expect(
-        mockAuthRepository.registerUserWithEmailAndPassword
+        mockAuthRepository.registerUserWithEmailAndPassword,
       ).toHaveBeenCalledWith(email, password);
     });
   });

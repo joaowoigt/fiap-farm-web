@@ -24,7 +24,7 @@ const buttonStyles = cva(
         intent: "ui-primary",
       },
     },
-  }
+  },
 );
 
 interface ButtonProps extends VariantProps<typeof buttonStyles> {

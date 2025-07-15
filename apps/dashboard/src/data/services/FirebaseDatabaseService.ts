@@ -27,12 +27,12 @@ export class FirebaseDatabaseService implements DatabaseService {
         return Success.create(docSnap.data() as T);
       } else {
         return Failure.create(
-          new NotFoundError(`Document not found in ${collection}/${id}`)
+          new NotFoundError(`Document not found in ${collection}/${id}`),
         );
       }
     } catch (error) {
       return Failure.create(
-        new DatabaseError(`Failed to get document: ${error}`)
+        new DatabaseError(`Failed to get document: ${error}`),
       );
     }
   }
@@ -40,7 +40,7 @@ export class FirebaseDatabaseService implements DatabaseService {
   async setDocument<T>(
     collection: string,
     id: string,
-    data: T
+    data: T,
   ): Promise<Result<void>> {
     try {
       const docRef = doc(this.db, collection, id);
@@ -48,7 +48,7 @@ export class FirebaseDatabaseService implements DatabaseService {
       return Success.create(undefined);
     } catch (error) {
       return Failure.create(
-        new DatabaseError(`Failed to set document: ${error}`)
+        new DatabaseError(`Failed to set document: ${error}`),
       );
     }
   }
@@ -56,7 +56,7 @@ export class FirebaseDatabaseService implements DatabaseService {
   async updateDocument<T>(
     collection: string,
     id: string,
-    data: Partial<T>
+    data: Partial<T>,
   ): Promise<Result<void>> {
     try {
       const docRef = doc(this.db, collection, id);
@@ -64,7 +64,7 @@ export class FirebaseDatabaseService implements DatabaseService {
       return Success.create(undefined);
     } catch (error) {
       return Failure.create(
-        new DatabaseError(`Failed to update document: ${error}`)
+        new DatabaseError(`Failed to update document: ${error}`),
       );
     }
   }
@@ -76,7 +76,7 @@ export class FirebaseDatabaseService implements DatabaseService {
       return Success.create(undefined);
     } catch (error) {
       return Failure.create(
-        new DatabaseError(`Failed to delete document: ${error}`)
+        new DatabaseError(`Failed to delete document: ${error}`),
       );
     }
   }

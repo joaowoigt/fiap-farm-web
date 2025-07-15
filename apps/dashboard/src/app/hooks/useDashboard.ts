@@ -60,7 +60,7 @@ export function useDashboard() {
 
   const addSalesItem = async (
     product: Product,
-    quantity: number
+    quantity: number,
   ): Promise<boolean> => {
     try {
       const success = await controller.addSalesItem(product, quantity);
@@ -77,7 +77,7 @@ export function useDashboard() {
 
   const addGoal = async (
     newGoal: Goal,
-    goalType: GoalType
+    goalType: GoalType,
   ): Promise<boolean> => {
     try {
       const success = await controller.addGoal(newGoal, goalType);

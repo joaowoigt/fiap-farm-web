@@ -54,7 +54,7 @@ describe("DIContainer", () => {
 
       expect(typeof authRepository.loginWithEmailAndPassword).toBe("function");
       expect(typeof authRepository.registerUserWithEmailAndPassword).toBe(
-        "function"
+        "function",
       );
     });
   });

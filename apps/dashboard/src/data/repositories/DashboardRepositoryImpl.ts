@@ -18,13 +18,13 @@ export class DashboardRepositoryImpl implements DashboardRepository {
     const trasactionList = response.data.result.transactions.map(
       (item: TransactionDB) => {
         return mapTransactionDBToTransactionResponse(item);
-      }
+      },
     );
     const balance = response.data.result.transactions.reduce(
       (acc: number, item: TransactionDB) => {
         return acc + item.value;
       },
-      0
+      0,
     );
     return {
       transactions: trasactionList,
@@ -35,7 +35,7 @@ export class DashboardRepositoryImpl implements DashboardRepository {
   async addTransaction(
     value: number,
     type: string,
-    accountId: string
+    accountId: string,
   ): Promise<boolean> {
     try {
       const transactionRequest = {
@@ -45,7 +45,7 @@ export class DashboardRepositoryImpl implements DashboardRepository {
       };
       const response = await http.post(
         "/account/transaction",
-        transactionRequest
+        transactionRequest,
       );
       return response.status === 201;
     } catch (error) {

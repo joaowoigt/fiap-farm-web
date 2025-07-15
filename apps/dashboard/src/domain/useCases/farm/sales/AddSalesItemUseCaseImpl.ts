@@ -12,12 +12,12 @@ export class AddSalesItemUseCaseImpl implements AddSalesItemUseCase {
 
   async execute(
     userId: string,
-    salesItem: SalesItem
+    salesItem: SalesItem,
   ): Promise<Result<boolean>> {
     return this.salesRepository.addSalesToUser(userId, salesItem);
   }
 }
 
 export const addSalesItemUseCaseImpl = new AddSalesItemUseCaseImpl(
-  firebaseSalesRepository
+  firebaseSalesRepository,
 );

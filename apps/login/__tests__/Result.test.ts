@@ -79,7 +79,7 @@ describe("Result Pattern", () => {
       const result = Failure.create(error);
 
       expect(() => result.getValue()).toThrow(
-        "Cannot get value from a failed result"
+        "Cannot get value from a failed result",
       );
     });
   });

@@ -43,7 +43,7 @@ export function useLogin() {
         (error) => {
           setError(error.message);
           return false;
-        }
+        },
       );
     } catch (err) {
       console.error("Erro inesperado ao fazer login", err);

@@ -25,11 +25,11 @@ export class FirebaseGoalsRepository implements GoalsRepository {
   async addGoalToUser(
     userId: string,
     newGoal: Goal,
-    goalType: GoalType
+    goalType: GoalType,
   ): Promise<Result<boolean>> {
     if (!userId || !newGoal) {
       return Failure.create(
-        new ValidationError("User ID e meta são obrigatórios")
+        new ValidationError("User ID e meta são obrigatórios"),
       );
     }
 
@@ -40,7 +40,7 @@ export class FirebaseGoalsRepository implements GoalsRepository {
       if (!userDocSnap.exists()) {
         console.error("User document does not exist");
         return Failure.create(
-          new NotFoundError("Documento do usuário não existe")
+          new NotFoundError("Documento do usuário não existe"),
         );
       }
 
@@ -50,13 +50,13 @@ export class FirebaseGoalsRepository implements GoalsRepository {
         userData.goals.productionGoals = this.updateProductionGoal(
           userData.goals,
           newGoal,
-          userData.production
+          userData.production,
         );
       } else {
         userData.goals.salesGoals = this.updateSalesGoal(
           userData.goals,
           newGoal,
-          userData.sales
+          userData.sales,
         );
       }
 
@@ -65,7 +65,7 @@ export class FirebaseGoalsRepository implements GoalsRepository {
     } catch (error) {
       console.error("Error adding goal to user:", error);
       return Failure.create(
-        new DatabaseError(`Erro ao adicionar meta: ${error}`)
+        new DatabaseError(`Erro ao adicionar meta: ${error}`),
       );
     }
   }
@@ -73,11 +73,11 @@ export class FirebaseGoalsRepository implements GoalsRepository {
   updateProductionGoal = (
     goals: Goals,
     newGoal: Goal,
-    production: Production[]
+    production: Production[],
   ) => {
     if (
       goals.productionGoals.some(
-        (currentGoal: Goal) => currentGoal.type === newGoal.type
+        (currentGoal: Goal) => currentGoal.type === newGoal.type,
       )
     ) {
       return goals.productionGoals.map((currentGoal: Goal) => {
@@ -100,7 +100,7 @@ export class FirebaseGoalsRepository implements GoalsRepository {
 
   getCurrentProductionValue = (production: Production[], type: Type) => {
     const currentProduction = production.filter(
-      (prod: Production) => prod.product.type === type
+      (prod: Production) => prod.product.type === type,
     );
 
     if (currentProduction.length === 0) {
@@ -118,7 +118,7 @@ export class FirebaseGoalsRepository implements GoalsRepository {
   updateSalesGoal = (goals: Goals, newGoal: Goal, sales: SalesItem[]) => {
     if (
       goals.salesGoals.some(
-        (currentGoal: Goal) => currentGoal.type === newGoal.type
+        (currentGoal: Goal) => currentGoal.type === newGoal.type,
       )
     ) {
       return goals.salesGoals.map((currentGoal: Goal) => {
@@ -141,7 +141,7 @@ export class FirebaseGoalsRepository implements GoalsRepository {
 
   getCurrentSalesValue = (sales: SalesItem[], type: Type) => {
     const currentSales = sales.filter(
-      (sale: SalesItem) => sale.product.type === type
+      (sale: SalesItem) => sale.product.type === type,
     );
 
     if (currentSales.length === 0) {
@@ -150,7 +150,7 @@ export class FirebaseGoalsRepository implements GoalsRepository {
 
     return currentSales.reduce(
       (total: number, sale: SalesItem) => total + sale.income,
-      0
+      0,
     );
   };
 }

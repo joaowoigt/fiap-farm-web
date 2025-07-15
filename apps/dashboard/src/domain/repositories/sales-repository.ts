@@ -4,6 +4,6 @@ import { Result } from "../common/Result";
 export interface SalesRepository {
   addSalesToUser(
     userId: string,
-    salesItem: SalesItem
+    salesItem: SalesItem,
   ): Promise<Result<boolean>>;
 }

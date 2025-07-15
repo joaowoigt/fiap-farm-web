@@ -20,11 +20,11 @@ export class FirebaseSalesRepository implements SalesRepository {
 
   async addSalesToUser(
     userId: string,
-    salesItem: SalesItem
+    salesItem: SalesItem,
   ): Promise<Result<boolean>> {
     if (!userId || !salesItem) {
       return Failure.create(
-        new ValidationError("User ID e item de venda são obrigatórios")
+        new ValidationError("User ID e item de venda são obrigatórios"),
       );
     }
 
@@ -35,7 +35,7 @@ export class FirebaseSalesRepository implements SalesRepository {
       if (!userDocSnap.exists()) {
         console.error("User document does not exist");
         return Failure.create(
-          new NotFoundError("Documento do usuário não existe")
+          new NotFoundError("Documento do usuário não existe"),
         );
       }
 
@@ -43,7 +43,7 @@ export class FirebaseSalesRepository implements SalesRepository {
       let updatedList: SalesItem[];
       if (
         userData.sales.some(
-          (item: SalesItem) => item.product.name === salesItem.product.name
+          (item: SalesItem) => item.product.name === salesItem.product.name,
         )
       ) {
         updatedList = userData.sales.map((item: SalesItem) => {
@@ -62,7 +62,7 @@ export class FirebaseSalesRepository implements SalesRepository {
       userData.sales = updatedList;
 
       const goalsIndex = userData.goals?.salesGoals.findIndex(
-        (goal: { type: string }) => goal.type === salesItem.product.type
+        (goal: { type: string }) => goal.type === salesItem.product.type,
       );
       if (goalsIndex !== -1) {
         userData.goals.salesGoals[goalsIndex].current += salesItem.income;
@@ -73,7 +73,7 @@ export class FirebaseSalesRepository implements SalesRepository {
     } catch (error) {
       console.error("Error adding sales item to user:", error);
       return Failure.create(
-        new DatabaseError(`Erro ao adicionar item de venda: ${error}`)
+        new DatabaseError(`Erro ao adicionar item de venda: ${error}`),
       );
     }
   }

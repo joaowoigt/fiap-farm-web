@@ -35,21 +35,21 @@ export default function RegisterFormController() {
     const userNameObserver = new RegisterObserver(
       setUserNameError,
       "userNameInput",
-      validateUserName
+      validateUserName,
     );
 
     // Observer para email
     const emailObserver = new RegisterObserver(
       setEmailError,
       "emailInput",
-      validateEmail
+      validateEmail,
     );
 
     // Observer para senha
     const passwordObserver = new RegisterObserver(
       setPasswordError,
       "passwordInput",
-      validatePassword
+      validatePassword,
     );
 
     // Cleanup é feito automaticamente pelos observers

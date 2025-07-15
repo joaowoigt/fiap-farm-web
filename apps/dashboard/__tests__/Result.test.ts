@@ -59,7 +59,7 @@ describe("Result Pattern", () => {
 
       const matched = result.match(
         (value) => `Success: ${value}`,
-        (err) => `Error: ${err.message}`
+        (err) => `Error: ${err.message}`,
       );
 
       expect(matched).toBe("Error: Test error");

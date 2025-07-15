@@ -10,7 +10,7 @@ export default class RegisterObserver {
   constructor(
     state: React.Dispatch<React.SetStateAction<UiError>>,
     elementId: string,
-    validation: (value: string) => { show: boolean; message: string }
+    validation: (value: string) => { show: boolean; message: string },
   ) {
     this.init(state, elementId, validation);
   }
@@ -18,19 +18,19 @@ export default class RegisterObserver {
   private init(
     state: React.Dispatch<React.SetStateAction<UiError>>,
     elementId: string,
-    validation: (value: string) => { show: boolean; message: string }
+    validation: (value: string) => { show: boolean; message: string },
   ) {
     const inputElement = document.getElementById(elementId) as HTMLInputElement;
     const input$ = fromEvent(inputElement, "input").pipe(
       map((event: Event) => (event.target as HTMLInputElement).value),
       debounceTime(300),
-      distinctUntilChanged()
+      distinctUntilChanged(),
     );
 
     const validation$ = input$.pipe(
       map((value: string) => {
         return validation(value);
-      })
+      }),
     );
 
     const subscription = validation$.subscribe((result: UiError) => {

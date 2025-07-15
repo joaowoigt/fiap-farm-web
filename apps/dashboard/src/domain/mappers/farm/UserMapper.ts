@@ -21,7 +21,7 @@ export function mapProduct(productResponse: ProductResponse): Product {
 }
 
 export function mapProduction(
-  productionResponse: ProductionResponse
+  productionResponse: ProductionResponse,
 ): Production {
   return {
     product: mapProduct(productionResponse.product),

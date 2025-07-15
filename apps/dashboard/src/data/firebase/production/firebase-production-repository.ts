@@ -22,11 +22,11 @@ export class FirebaseProductionRepository implements ProductionRepository {
 
   async addProductionToUser(
     userId: string,
-    production: Production
+    production: Production,
   ): Promise<Result<boolean>> {
     if (!userId || !production) {
       return Failure.create(
-        new ValidationError("User ID e produção são obrigatórios")
+        new ValidationError("User ID e produção são obrigatórios"),
       );
     }
 
@@ -37,7 +37,7 @@ export class FirebaseProductionRepository implements ProductionRepository {
       if (!userDocSnap.exists()) {
         console.error("User document does not exist");
         return Failure.create(
-          new NotFoundError("Documento do usuário não existe")
+          new NotFoundError("Documento do usuário não existe"),
         );
       }
 
@@ -46,7 +46,7 @@ export class FirebaseProductionRepository implements ProductionRepository {
         userData.production = [];
       }
       const goalsIndex = userData.goals?.productionGoals.findIndex(
-        (goal: Goal) => goal.type === production.product.type
+        (goal: Goal) => goal.type === production.product.type,
       );
       if (goalsIndex !== -1 && production.status === "done") {
         userData.goals.productionGoals[goalsIndex].current =
@@ -60,12 +60,12 @@ export class FirebaseProductionRepository implements ProductionRepository {
     } catch (error) {
       console.error("Error adding production to user:", error);
       return Failure.create(
-        new DatabaseError(`Erro ao adicionar produção: ${error}`)
+        new DatabaseError(`Erro ao adicionar produção: ${error}`),
       );
     }
   }
 }
 
 export const firebaseProductionRepository = new FirebaseProductionRepository(
-  db
+  db,
 );

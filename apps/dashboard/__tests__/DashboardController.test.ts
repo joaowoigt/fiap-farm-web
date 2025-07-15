@@ -83,7 +83,7 @@ describe("DashboardController", () => {
       } as User;
 
       mockUserRepository.getUserByUid.mockResolvedValue(
-        Success.create(mockUser)
+        Success.create(mockUser),
       );
       mockSessionStorage.getItem.mockReturnValue("encrypted-user-id");
 
@@ -95,7 +95,7 @@ describe("DashboardController", () => {
         goals: { productionGoals: [], salesGoals: [] },
       });
       expect(mockUserRepository.getUserByUid).toHaveBeenCalledWith(
-        "encrypted-user-id"
+        "encrypted-user-id",
       );
     });
 
@@ -110,7 +110,7 @@ describe("DashboardController", () => {
 
     it("should handle repository errors gracefully", async () => {
       mockUserRepository.getUserByUid.mockResolvedValue(
-        Failure.create(new ValidationError("User not found"))
+        Failure.create(new ValidationError("User not found")),
       );
       mockSessionStorage.getItem.mockReturnValue("test-user-id");
 
@@ -124,7 +124,7 @@ describe("DashboardController", () => {
     it("should add production successfully", async () => {
       const mockProduction = {} as Production;
       mockProductionRepository.addProductionToUser.mockResolvedValue(
-        Success.create(true)
+        Success.create(true),
       );
       mockSessionStorage.getItem.mockReturnValue("test-user-id");
 
@@ -133,14 +133,14 @@ describe("DashboardController", () => {
       expect(result).toBe(true);
       expect(mockProductionRepository.addProductionToUser).toHaveBeenCalledWith(
         "test-user-id",
-        mockProduction
+        mockProduction,
       );
     });
 
     it("should handle production addition failure", async () => {
       const mockProduction = {} as Production;
       mockProductionRepository.addProductionToUser.mockResolvedValue(
-        Failure.create(new ValidationError("Invalid production data"))
+        Failure.create(new ValidationError("Invalid production data")),
       );
       mockSessionStorage.getItem.mockReturnValue("test-user-id");
 
@@ -157,7 +157,7 @@ describe("DashboardController", () => {
 
       expect(result).toBe(false);
       expect(
-        mockProductionRepository.addProductionToUser
+        mockProductionRepository.addProductionToUser,
       ).not.toHaveBeenCalled();
     });
   });

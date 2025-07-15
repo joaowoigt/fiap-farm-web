@@ -16,7 +16,7 @@ export class AuthController {
     // Injeção de dependências através do container
     this.loginUseCase = new LoginUseCaseImpl(container.getAuthRepository());
     this.registerUseCase = new RegisterUseCaseImpl(
-      container.getAuthRepository()
+      container.getAuthRepository(),
     );
   }
 
@@ -54,7 +54,7 @@ class RegisterUseCaseImpl implements RegisterUseCase {
   async execute(email: string, password: string): Promise<Result<User>> {
     return await this.authRepository.registerUserWithEmailAndPassword(
       email,
-      password
+      password,
     );
   }
 }

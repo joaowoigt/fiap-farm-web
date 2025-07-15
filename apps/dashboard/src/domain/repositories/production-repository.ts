@@ -4,6 +4,6 @@ import { Result } from "../common/Result";
 export interface ProductionRepository {
   addProductionToUser(
     userId: string,
-    production: Production
+    production: Production,
   ): Promise<Result<boolean>>;
 }

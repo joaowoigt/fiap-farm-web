@@ -12,17 +12,17 @@ export class RegisterUseCaseImpl implements RegisterUseCase {
     // Validate input - check for empty or whitespace-only strings
     if (!email || !password || email.trim() === "" || password.trim() === "") {
       return Failure.create(
-        new ValidationError("Email e senha são obrigatórios")
+        new ValidationError("Email e senha são obrigatórios"),
       );
     }
 
     return await this.authRepository.registerUserWithEmailAndPassword(
       email,
-      password
+      password,
     );
   }
 }
 
 export const registerUseCaseImpl = new RegisterUseCaseImpl(
-  firebaseAuthRepository
+  firebaseAuthRepository,
 );

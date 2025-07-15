@@ -25,5 +25,5 @@ export class GetUserUseCaseImpl implements GetUserUseCase {
 }
 
 export const getUserUseCaseImpl = new GetUserUseCaseImpl(
-  firebaseUserRepository
+  firebaseUserRepository,
 );

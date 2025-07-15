@@ -11,12 +11,12 @@ export class AddProductionUseCaseImpl implements AddProductionUseCase {
 
   async execute(
     userId: string,
-    production: Production
+    production: Production,
   ): Promise<Result<boolean>> {
     return this.productionRepository.addProductionToUser(userId, production);
   }
 }
 
 export const addProductionUseCaseImpl = new AddProductionUseCaseImpl(
-  firebaseProductionRepository
+  firebaseProductionRepository,
 );

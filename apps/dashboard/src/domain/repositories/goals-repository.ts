@@ -6,6 +6,6 @@ export interface GoalsRepository {
   addGoalToUser(
     userId: string,
     newGoal: Goal,
-    goalType: GoalType
+    goalType: GoalType,
   ): Promise<Result<boolean>>;
 }

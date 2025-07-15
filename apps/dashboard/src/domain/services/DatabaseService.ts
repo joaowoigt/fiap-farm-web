@@ -6,12 +6,12 @@ export interface DatabaseService {
   setDocument<T>(
     collection: string,
     id: string,
-    data: T
+    data: T,
   ): Promise<Result<void>>;
   updateDocument<T>(
     collection: string,
     id: string,
-    data: Partial<T>
+    data: Partial<T>,
   ): Promise<Result<void>>;
   deleteDocument(collection: string, id: string): Promise<Result<void>>;
 }

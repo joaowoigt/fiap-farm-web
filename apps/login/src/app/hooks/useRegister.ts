@@ -51,7 +51,7 @@ export function useRegister() {
   };
 
   const handleConfirmPasswordChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     setConfirmPassword(event.target.value);
     if (error) setError(null);
@@ -93,7 +93,7 @@ export function useRegister() {
           console.log("Erro no registro:", error.message);
           setError(error.message);
           return false;
-        }
+        },
       );
     } catch (err) {
       console.error("Erro inesperado ao registrar", err);

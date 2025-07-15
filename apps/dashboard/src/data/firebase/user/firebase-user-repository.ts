@@ -62,7 +62,7 @@ export class FirebaseUserRepository implements UserRepository {
     } catch (error) {
       console.error("Error getting user:", error);
       return Failure.create(
-        new DatabaseError(`Erro ao buscar usuário: ${error}`)
+        new DatabaseError(`Erro ao buscar usuário: ${error}`),
       );
     }
   }

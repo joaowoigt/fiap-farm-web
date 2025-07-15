@@ -12,7 +12,7 @@ export class LoginUseCaseImpl implements LoginUseCase {
     // Validate input - check for empty or whitespace-only strings
     if (!email || !password || email.trim() === "" || password.trim() === "") {
       return Failure.create(
-        new ValidationError("Email e senha são obrigatórios")
+        new ValidationError("Email e senha são obrigatórios"),
       );
     }
 

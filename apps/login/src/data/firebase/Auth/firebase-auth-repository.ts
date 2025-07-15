@@ -22,11 +22,11 @@ export class FirebaseAuthRepository implements AuthRepository {
 
   async registerUserWithEmailAndPassword(
     email: string,
-    password: string
+    password: string,
   ): Promise<Result<User>> {
     if (!email || !password) {
       return Failure.create(
-        new ValidationError("Email e senha são obrigatórios")
+        new ValidationError("Email e senha são obrigatórios"),
       );
     }
 
@@ -34,7 +34,7 @@ export class FirebaseAuthRepository implements AuthRepository {
       const userCredential = await createUserWithEmailAndPassword(
         firebaseAuthInstance,
         email,
-        password
+        password,
       );
       const domainUser = mapFirebaseUserToDomainUser(userCredential.user);
       return Success.create(domainUser);
@@ -48,18 +48,18 @@ export class FirebaseAuthRepository implements AuthRepository {
         return Failure.create(new ValidationError("Email inválido"));
       }
       return Failure.create(
-        new NetworkError(`Erro ao registrar usuário: ${error.message}`)
+        new NetworkError(`Erro ao registrar usuário: ${error.message}`),
       );
     }
   }
 
   async loginWithEmailAndPassword(
     email: string,
-    password: string
+    password: string,
   ): Promise<Result<User>> {
     if (!email || !password) {
       return Failure.create(
-        new ValidationError("Email e senha são obrigatórios")
+        new ValidationError("Email e senha são obrigatórios"),
       );
     }
 
@@ -67,7 +67,7 @@ export class FirebaseAuthRepository implements AuthRepository {
       const userCredential = await signInWithEmailAndPassword(
         this.auth,
         email,
-        password
+        password,
       );
       if (userCredential.user) {
         const domainUser = mapFirebaseUserToDomainUser(userCredential.user);
@@ -82,18 +82,18 @@ export class FirebaseAuthRepository implements AuthRepository {
         error.code === "auth/wrong-password"
       ) {
         return Failure.create(
-          new AuthenticationError("Email ou senha inválidos")
+          new AuthenticationError("Email ou senha inválidos"),
         );
       } else if (error.code === "auth/invalid-email") {
         return Failure.create(new ValidationError("Email inválido"));
       }
       return Failure.create(
-        new NetworkError(`Erro ao fazer login: ${error.message}`)
+        new NetworkError(`Erro ao fazer login: ${error.message}`),
       );
     }
   }
 }
 
 export const firebaseAuthRepository = new FirebaseAuthRepository(
-  firebaseAuthInstance
+  firebaseAuthInstance,
 );

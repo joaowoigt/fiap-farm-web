@@ -12,7 +12,7 @@ export abstract class Result<T> {
         return Success.create(fn(this.getValue()));
       } catch (error) {
         return Failure.create(
-          error instanceof Error ? error : new Error(String(error))
+          error instanceof Error ? error : new Error(String(error)),
         );
       }
     }

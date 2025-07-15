@@ -7,6 +7,6 @@ export interface DashboardRepository {
   addTransaction(
     value: number,
     type: string,
-    accountId: string
+    accountId: string,
   ): Promise<boolean>;
 }

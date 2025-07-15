@@ -33,13 +33,13 @@ export class DashboardController {
     // Injeção de dependências através do container
     this.getUserUseCase = new GetUserUseCaseImpl(container.getUserRepository());
     this.addProductionUseCase = new AddProductionUseCaseImpl(
-      container.getProductionRepository()
+      container.getProductionRepository(),
     );
     this.addSalesItemUseCase = new AddSalesItemUseCaseImpl(
-      container.getSalesRepository()
+      container.getSalesRepository(),
     );
     this.addGoalsUseCase = new AddGoalUseCaseImpl(
-      container.getGoalsRepository()
+      container.getGoalsRepository(),
     );
   }
 
@@ -67,7 +67,7 @@ export class DashboardController {
         (error) => {
           console.error("Error fetching user data:", error);
           return null;
-        }
+        },
       );
     } catch (error) {
       console.error("Error in fetchUserData:", error);
@@ -86,7 +86,7 @@ export class DashboardController {
     try {
       const result = await this.addProductionUseCase.execute(
         userId,
-        newProduction
+        newProduction,
       );
 
       return result.match(
@@ -94,7 +94,7 @@ export class DashboardController {
         (error) => {
           console.error("Error adding production:", error);
           return false;
-        }
+        },
       );
     } catch (error) {
       console.error("Error in addProduction:", error);
@@ -119,7 +119,7 @@ export class DashboardController {
         (error) => {
           console.error("Error adding sales item:", error);
           return false;
-        }
+        },
       );
     } catch (error) {
       console.error("Error in addSalesItem:", error);
@@ -139,7 +139,7 @@ export class DashboardController {
       const result = await this.addGoalsUseCase.execute(
         userId,
         newGoal,
-        goalType
+        goalType,
       );
 
       return result.match(
@@ -147,7 +147,7 @@ export class DashboardController {
         (error) => {
           console.error("Error adding goal:", error);
           return false;
-        }
+        },
       );
     } catch (error) {
       console.error("Error in addGoal:", error);
@@ -179,11 +179,11 @@ class AddProductionUseCaseImpl implements AddProductionUseCase {
 
   async execute(
     userId: string,
-    production: Production
+    production: Production,
   ): Promise<Result<boolean>> {
     return await this.productionRepository.addProductionToUser(
       userId,
-      production
+      production,
     );
   }
 }
@@ -193,7 +193,7 @@ class AddSalesItemUseCaseImpl implements AddSalesItemUseCase {
 
   async execute(
     userId: string,
-    salesItem: SalesItem
+    salesItem: SalesItem,
   ): Promise<Result<boolean>> {
     return await this.salesRepository.addSalesToUser(userId, salesItem);
   }
@@ -205,7 +205,7 @@ class AddGoalUseCaseImpl implements AddGoalUseCase {
   async execute(
     userId: string,
     newGoal: Goal,
-    goalType: GoalType
+    goalType: GoalType,
   ): Promise<Result<boolean>> {
     return await this.goalsRepository.addGoalToUser(userId, newGoal, goalType);
   }

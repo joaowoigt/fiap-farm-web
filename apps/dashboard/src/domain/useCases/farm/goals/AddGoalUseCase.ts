@@ -6,6 +6,6 @@ export interface AddGoalUseCase {
   execute: (
     userId: string,
     newGoal: Goal,
-    type: GoalType
+    type: GoalType,
   ) => Promise<Result<boolean>>;
 }
