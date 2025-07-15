@@ -1,136 +1,71 @@
 "use client";
-import { useEffect, useState } from "react";
-import { decrypt } from "../data/security/EncryptUtils";
-import { getUserUseCaseImpl } from "../domain/useCases/farm/GetUserUseCaseImpl";
 import Header from "./header";
-import Tabs from "./tabsUtils";
 import ProductionDashboard from "./production";
-import Production, {
-  getAllAvailableProducts,
-} from "../domain/models/farm/production/Production";
-import { addProductionUseCaseImpl } from "../domain/useCases/farm/production/AddProductionUseCaseImpls";
 import SalesDashboard from "./sales";
-import SalesItem, {
-  createSalesItem,
-} from "../domain/models/farm/sales/SalesItem";
-import { addSalesItemUseCaseImpl } from "../domain/useCases/farm/sales/AddSalesItemUseCaseImpl";
-import Product from "../domain/models/farm/product/Product";
-import Loading from "./loading";
 import GoalsDashboard from "./goals";
-import Goals from "../domain/models/farm/goals/Goals";
-import { addGoalUseCaseImpl } from "../domain/useCases/farm/goals/AddGoalUseCaseImpl";
-import Goal from "../domain/models/farm/goals/Goal";
-import { GoalType } from "@repo/ui/dropdown";
-
-const getUserUseCase = getUserUseCaseImpl;
-const addProductionUseCase = addProductionUseCaseImpl;
-const addSalesItemUseCase = addSalesItemUseCaseImpl;
-const addGoalsUseCase = addGoalUseCaseImpl;
-
-const emptyGoals: Goals = { productionGoals: [], salesGoals: [] };
+import Loading from "./loading";
+import { useDashboard } from "./hooks/useDashboard";
+import Tabs from "./tabsUtils";
 
 export default function Page(): JSX.Element {
-  const [name, setName] = useState("");
-  const [showTab, setShowTab] = useState(Tabs.production);
-  const [productionList, setProductionList] = useState<Production[]>([]);
-  const [salesList, setSalesList] = useState<SalesItem[]>([]);
-  const [goals, setGoals] = useState<Goals>(emptyGoals);
-  const [loading, setLoading] = useState(true);
+  const {
+    productionList,
+    salesList,
+    goals,
+    loading,
+    error,
+    showTab,
+    availableProducts,
+    addProduction,
+    addSalesItem,
+    addGoal,
+    onProductionClick,
+    onSalesClick,
+    onGoalsClick,
+  } = useDashboard();
 
-  const onProductionClick = () => {
-    setShowTab(Tabs.production);
-    console.log("Production clicked");
-  };
-
-  const onSalesClick = () => {
-    setShowTab(Tabs.sales);
-    console.log("Sales clicked");
-  };
-
-  const onGoalsClick = () => {
-    setShowTab(Tabs.goals);
-    console.log("Goals clicked");
-  };
-
-  async function fetchAccount() {
-    setLoading(true);
-    const userId = decrypt(sessionStorage.getItem("farmUser") ?? "");
-    const user = await getUserUseCase.execute(userId);
-    setProductionList(user?.production ?? []);
-    setSalesList(user?.sales ?? []);
-    setGoals(user?.goals ?? emptyGoals);
-    setLoading(false);
+  if (loading) {
+    return Loading();
   }
 
-  async function addProduction(newProduction: Production): Promise<boolean> {
-    const userId = decrypt(sessionStorage.getItem("farmUser") ?? "");
-    const success = await addProductionUseCase.execute(userId, newProduction);
-    if (success) {
-      fetchAccount();
-    }
-    return success;
+  if (error) {
+    return (
+      <div className="bg-background h-full flex flex-col mobile:w-full">
+        <div className="bg-white flex flex-col items-center h-full m-10 border-2 border-primary rounded-lg shadow-lg p-8">
+          <h1 className="text-2xl font-bold text-error mb-4">Erro</h1>
+          <p className="text-gray-600">{error}</p>
+        </div>
+      </div>
+    );
   }
-
-  async function addSalesItem(
-    product: Product,
-    quantity: number
-  ): Promise<boolean> {
-    const userId = decrypt(sessionStorage.getItem("farmUser") ?? "");
-    const salesItem = createSalesItem(product, quantity);
-    const success = await addSalesItemUseCase.execute(userId, salesItem);
-    if (success) {
-      fetchAccount();
-    }
-    return success;
-  }
-
-  async function addGoal(newGoal: Goal, goalType: GoalType): Promise<boolean> {
-    const userId = decrypt(sessionStorage.getItem("farmUser") ?? "");
-    const success = await addGoalsUseCase.execute(userId, newGoal, goalType);
-    if (success) {
-      fetchAccount();
-    }
-    return success;
-  }
-
-  useEffect(() => {
-    fetchAccount();
-  }, []);
   return (
     <div className="bg-background h-full flex flex-col mobile:w-full">
       <div className="bg-white flex flex-col items-center h-full m-10 border-2 border-primary rounded-lg shadow-lg">
         <Header
-          name={name}
+          name=""
           onProductionClick={onProductionClick}
           onSalesClick={onSalesClick}
           onGoalsClick={onGoalsClick}
         />
-        {loading && Loading()}
 
-        {!loading && (
-          <div className="flex flex-col w-full p-4">
-            {showTab === Tabs.production && (
-              <ProductionDashboard
-                production={productionList}
-                onAddProduction={(newProduction: Production) => {
-                  return addProduction(newProduction);
-                }}
-              />
-            )}
-            {showTab === Tabs.sales && (
-              <SalesDashboard
-                sales={salesList}
-                products={getAllAvailableProducts(productionList)}
-                onAddSale={(product: Product, quantity: number) =>
-                  addSalesItem(product, quantity)
-                }
-              />
-            )}
-            {showTab === Tabs.goals && (
-              <GoalsDashboard goals={goals} onAddGoal={addGoal} />
-            )}
-          </div>
-        )}
+        <div className="flex flex-col w-full p-4">
+          {showTab === Tabs.production && (
+            <ProductionDashboard
+              production={productionList}
+              onAddProduction={addProduction}
+            />
+          )}
+          {showTab === Tabs.sales && (
+            <SalesDashboard
+              sales={salesList}
+              products={availableProducts}
+              onAddSale={addSalesItem}
+            />
+          )}
+          {showTab === Tabs.goals && (
+            <GoalsDashboard goals={goals} onAddGoal={addGoal} />
+          )}
+        </div>
       </div>
     </div>
   );

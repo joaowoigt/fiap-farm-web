@@ -1,61 +1,38 @@
-import React, { useState } from "react";
-
-import { LoginUseCase } from "../../domain/useCases/login/LoginUseCase";
+import React from "react";
 import LoginFormScreen from "./ui";
-import { encrypt } from "../../data/security/EncryptUtils";
+import { useLogin } from "../hooks/useLogin";
 
-interface LoginFormControllerProps {
-  loginUseCase: LoginUseCase;
-}
-
-export default function LoginFormController({
-  loginUseCase,
-}: LoginFormControllerProps) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState({
-    show: false,
-    message: "Email ou senha invalidos",
-  });
-
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
-  };
-
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-  };
+// Componente simplificado - responsável apenas pela apresentação
+export default function LoginFormController() {
+  const {
+    email,
+    password,
+    loading,
+    error,
+    handleEmailChange,
+    handlePasswordChange,
+    handleLogin,
+  } = useLogin();
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!email || !password) {
-      setError({ show: true, message: "Preencha os campos para prosseguir" });
-      return;
-    }
-    try {
-      const userResult = await loginUseCase.execute(email, password);
-      if ("user" in userResult) {
-        console.log("Login bem-sucedido", userResult.user);
-        sessionStorage.setItem(
-          "farmUser",
-          encrypt(userResult.user.id).encryptedData
-        );
-        setError({ show: false, message: "" });
-        window.location.href = "/dashboard";
-      } else {
-        setError(userResult);
-      }
-    } catch (error) {
-      console.error("Erro ao fazer login", error);
-      setError({ show: true, message: "Erro ao fazer login" });
+    const success = await handleLogin();
+    if (success) {
+      window.location.href = "/dashboard";
     }
   };
+
   return (
     <LoginFormScreen
+      email={email}
+      password={password}
+      loading={loading}
+      error={
+        error ? { show: true, message: error } : { show: false, message: "" }
+      }
       onSubmit={onSubmit}
       handleEmailChange={handleEmailChange}
       handlePasswordChange={handlePasswordChange}
-      error={error}
-    ></LoginFormScreen>
+    />
   );
 }

@@ -1,12 +1,13 @@
 import { User } from "../models/user";
+import { Result } from "../common/Result";
 
 export interface AuthRepository {
   registerUserWithEmailAndPassword: (
     email: string,
     password: string
-  ) => Promise<any>;
+  ) => Promise<Result<User>>;
   loginWithEmailAndPassword: (
     email: string,
     password: string
-  ) => Promise<User | null>;
+  ) => Promise<Result<User>>;
 }

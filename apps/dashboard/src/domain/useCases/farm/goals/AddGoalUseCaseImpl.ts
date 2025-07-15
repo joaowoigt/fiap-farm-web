@@ -3,6 +3,7 @@ import { firebaseGoalsRepository } from "../../../../data/firebase/goals/firebas
 import Goal from "../../../models/farm/goals/Goal";
 import { GoalsRepository } from "../../../repositories/goals-repository";
 import { AddGoalUseCase } from "./AddGoalUseCase";
+import { Result, Failure, ValidationError } from "../../../common/Result";
 
 export class AddGoalUseCaseImpl implements AddGoalUseCase {
   constructor(private goalsRepository: GoalsRepository) {}
@@ -11,9 +12,11 @@ export class AddGoalUseCaseImpl implements AddGoalUseCase {
     userId: string,
     newGoal: Goal,
     type: GoalType
-  ): Promise<boolean> {
+  ): Promise<Result<boolean>> {
     if (!userId || !newGoal) {
-      throw new Error("User ID and goal must be provided");
+      return Failure.create(
+        new ValidationError("User ID e meta são obrigatórios")
+      );
     }
 
     return this.goalsRepository.addGoalToUser(userId, newGoal, type);

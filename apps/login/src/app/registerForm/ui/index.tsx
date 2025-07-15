@@ -1,5 +1,6 @@
 import { Text } from "@repo/ui/texts";
 import { Button } from "@repo/ui/buttons";
+import { UiError } from "../../../domain/models/uiError";
 
 export interface RegisterFormScreenProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -7,8 +8,13 @@ export interface RegisterFormScreenProps {
   handleEmailChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handlePasswordChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   error: { show: boolean; message: string };
-  inputError: { show: boolean; message: string };
+  userNameError: UiError;
+  emailError: UiError;
+  passwordError: UiError;
   success: boolean;
+  userName: string;
+  email: string;
+  password: string;
 }
 
 export default function RegisterFormScreen({
@@ -17,8 +23,13 @@ export default function RegisterFormScreen({
   handleEmailChange,
   handlePasswordChange,
   error,
-  inputError,
+  userNameError,
+  emailError,
+  passwordError,
   success,
+  userName,
+  email,
+  password,
 }: RegisterFormScreenProps) {
   return (
     <div>
@@ -28,7 +39,7 @@ export default function RegisterFormScreen({
           color="default"
           style="bold"
           text="Cadastre-se"
-        ></Text>
+        ></Text>{" "}
         {error.show && (
           <Text
             intent="Regular"
@@ -37,72 +48,90 @@ export default function RegisterFormScreen({
             text={error.message}
           ></Text>
         )}
-        {inputError.show && (
-          <Text
-            intent="RegultarBorded"
-            color="negative"
-            style="bold"
-            text={inputError.message}
-          ></Text>
-        )}
-        <form>
+        <form onSubmit={onSubmit}>
           <Text
             intent="Regular"
             color="default"
             style="bold"
             text="Nome"
-          ></Text>
-          <input
-            className="outline outline-1 outline-primary  mb-6 mt-4 bg-white rounded-md px-3 w-[250px]  py-3 text-black text-start flex flex-row hover:cursor-text"
+          ></Text>          <input
+            className="outline outline-1 outline-primary  mb-2 mt-4 bg-white rounded-md px-3 w-[250px]  py-3 text-black text-start flex flex-row hover:cursor-text"
             type="text"
             name="username"
             id="userNameInput"
+            value={userName}
             onChange={handleUsernameChange}
             color="default"
           ></input>
+          {userNameError.show && (
+            <Text
+              intent="RegultarBorded"
+              color="negative"
+              style="bold"
+              text={userNameError.message}
+            ></Text>
+          )}
+          <div className="mb-4"></div>
           <Text
             intent="Regular"
             color="default"
             style="bold"
             text="Email"
-          ></Text>
-          <input
-            className="outline outline-1 outline-primary  mb-6 mt-4 bg-white rounded-md px-3 w-[250px]  py-3 text-black text-start flex flex-row hover:cursor-text"
-            type="text"
+          ></Text>          <input
+            className="outline outline-1 outline-primary  mb-2 mt-4 bg-white rounded-md px-3 w-[250px]  py-3 text-black text-start flex flex-row hover:cursor-text"
+            type="email"
             name="emailname"
             id="emailInput"
+            value={email}
             onChange={handleEmailChange}
             color="default"
           ></input>
+          {emailError.show && (
+            <Text
+              intent="RegultarBorded"
+              color="negative"
+              style="bold"
+              text={emailError.message}
+            ></Text>
+          )}
+          <div className="mb-4"></div>
           <Text
             intent="Regular"
             color="default"
             style="bold"
             text="Senha"
-          ></Text>
-          <input
-            className="outline outline-1 outline-primary  mb-6 mt-4 bg-white rounded-md px-3 w-[250px]  py-3 text-black text-start flex flex-row hover:cursor-text"
+          ></Text>          <input
+            className="outline outline-1 outline-primary  mb-2 mt-4 bg-white rounded-md px-3 w-[250px]  py-3 text-black text-start flex flex-row hover:cursor-text"
             type="password"
             name="password"
             id="passwordInput"
+            value={password}
             onChange={handlePasswordChange}
             color="default"
           ></input>
-          {success && (
+          {passwordError.show && (
             <Text
-              intent="Regular"
-              color="default"
+              intent="RegultarBorded"
+              color="negative"
               style="bold"
-              text="Usuário cadastrado com sucesso"
+              text={passwordError.message}
             ></Text>
+          )}          <div className="mb-4"></div>
+          {success && (
+            <div className="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded-md">
+              <Text
+                intent="Regular"
+                color="default"
+                style="bold"
+                text="✅ Usuário cadastrado com sucesso!"
+              ></Text>
+            </div>
           )}
           <div className="flex flex-row justify-center">
             <Button
               intent="primary"
-              text="Resgistrar"
-              onClick={(event) => {
-                onSubmit(event);
-              }}
+              text="Registrar"
+              {...{ type: "submit" } as any}
             ></Button>
           </div>
         </form>

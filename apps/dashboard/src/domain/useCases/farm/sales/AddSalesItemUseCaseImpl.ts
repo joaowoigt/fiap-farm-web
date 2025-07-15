@@ -5,11 +5,15 @@ import SalesItem, {
 } from "../../../models/farm/sales/SalesItem";
 import { SalesRepository } from "../../../repositories/sales-repository";
 import { AddSalesItemUseCase } from "./AddSalesItemUseCase";
+import { Result } from "../../../common/Result";
 
 export class AddSalesItemUseCaseImpl implements AddSalesItemUseCase {
   constructor(private salesRepository: SalesRepository) {}
 
-  async execute(userId: string, salesItem: SalesItem): Promise<boolean> {
+  async execute(
+    userId: string,
+    salesItem: SalesItem
+  ): Promise<Result<boolean>> {
     return this.salesRepository.addSalesToUser(userId, salesItem);
   }
 }
