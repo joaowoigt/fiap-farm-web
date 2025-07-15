@@ -253,31 +253,4 @@ Este projeto representa a aplicação prática dos conhecimentos adquiridos em d
 
 ---
 
-## 📄 Licença
-
-Este projeto foi desenvolvido para fins educacionais como parte do **Hackathon FIAP + Alura 2025**.
-
-### 📋 Termos de Uso
-
-- ✅ Uso para aprendizado e portfólio
-- ✅ Referência para estudos de arquitetura
-- ✅ Base para projetos acadêmicos
-- ❌ Uso comercial sem autorização
-- ❌ Redistribuição sem créditos
-
-### 🎓 Finalidade Educacional
-
-Este projeto demonstra:
-
-- Arquitetura de microfrontends
-- Padrões de Clean Architecture
-- Desenvolvimento com TypeScript
-- Testes automatizados
-- CI/CD com GitHub Actions
-- Design System modular
-
----
-
 **💚 Desenvolvido com ❤️ para o Hackathon FIAP + Alura 2025**
-
-_Um projeto que representa a paixão pela tecnologia e o compromisso com a excelência em engenharia de software._
