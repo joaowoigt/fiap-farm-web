@@ -4,7 +4,7 @@ import {
   Failure,
   ValidationError,
   DatabaseError,
-} from "../../../src/domain/common/Result";
+} from "../src/domain/common/Result";
 
 describe("Result Pattern", () => {
   describe("Success", () => {
@@ -59,7 +59,7 @@ describe("Result Pattern", () => {
 
       const matched = result.match(
         (value) => `Success: ${value}`,
-        (err) => `Error: ${err.message}`,
+        (err) => `Error: ${err.message}`
       );
 
       expect(matched).toBe("Error: Test error");
