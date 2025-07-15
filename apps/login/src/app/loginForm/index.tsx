@@ -34,19 +34,16 @@ export default function LoginFormController({
     }
     try {
       const userResult = await loginUseCase.execute(email, password);
-      if (userResult.isSuccess) {
-        console.log("Login bem-sucedido", userResult.value);
+      if ("user" in userResult) {
+        console.log("Login bem-sucedido", userResult.user);
         sessionStorage.setItem(
           "farmUser",
-          encrypt(userResult.value.id).encryptedData
+          encrypt(userResult.user.id).encryptedData
         );
         setError({ show: false, message: "" });
         window.location.href = "/dashboard";
       } else {
-        setError({
-          show: true,
-          message: userResult.error?.message || "Erro ao fazer login",
-        });
+        setError(userResult);
       }
     } catch (error) {
       console.error("Erro ao fazer login", error);
