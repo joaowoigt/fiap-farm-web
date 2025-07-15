@@ -1,17 +1,6 @@
 version: "3"
 
 services:
-  home:
-    container_name: home
-    image: 221082188217.dkr.ecr.us-east-1.amazonaws.com/bytebank-turbo
-    build:
-      context: .
-      dockerfile: ./apps/home/Dockerfile
-    restart: always
-    ports:
-      - 3000:3000
-    networks:
-      - app_network
   dashboard:
     container_name: dashboard
     image: 221082188217.dkr.ecr.us-east-1.amazonaws.com/bytebank-turbo-dashboard

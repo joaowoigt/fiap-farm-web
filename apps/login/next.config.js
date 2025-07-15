@@ -7,20 +7,13 @@ module.exports = {
   output: "standalone",
   reactStrictMode: true,
   transpilePackages: ["@repo/ui"],
-  assetPrefix: "/login",
-  async rewrites() {
+  assetPrefix: "/login",  async rewrites() {
     return [
       {
         source: "/dashboard",
         destination: `http://localhost:3001/`,
         source: "/dashboard/:path*",
         destination: `http://localhost:3001/:path*`,
-      },
-      {
-        source: "/home",
-        destination: `http://localhost:3003/`,
-        source: "/home/:path*",
-        destination: `http://localhost:3003/:path*`,
       },
     ];
   },
